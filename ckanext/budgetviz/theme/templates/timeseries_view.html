@@ -1,4 +1,7 @@
 {% extends 'dataviewer/base.html' %}
+<style>
+    
+    </style>
 {% block page %}
 <div class="infocard">
         <div class="row">
@@ -9,7 +12,7 @@
             </div>
             <div class="col-lg-5">
                 <div class="scheme-select"></div>
-                asdasdasdas
+    
             </div>
         </div>
         <hr>
@@ -24,11 +27,12 @@
 
   <script>
     var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
-    console.log(resource_url)
+ 
     
    
   </script>
-  
-{% endblock %}
-  {% resource 'ckanext-budgetviz/execute-viz.js' %}
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
+ 
   {% resource 'ckanext-budgetviz/main' %}
+{% endblock %}
+  
