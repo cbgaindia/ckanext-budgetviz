@@ -1,0 +1,34 @@
+{% extends 'dataviewer/base.html' %}
+{% block page %}
+<div class="infocard">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="viz-header">
+                    <span id="viz-header"></h2>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="scheme-select"></div>
+                asdasdasdas
+            </div>
+        </div>
+        <hr>
+        <div id="chart" class='with-3d-shadow with-transitions'>
+            <svg></svg>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+
+  <script>
+    var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
+    console.log(resource_url)
+    
+   
+  </script>
+  
+{% endblock %}
+  {% resource 'ckanext-budgetviz/execute-viz.js' %}
+  {% resource 'ckanext-budgetviz/main' %}
