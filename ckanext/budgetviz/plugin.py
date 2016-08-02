@@ -36,7 +36,6 @@ class Timeseries_IPFS(p.SingletonPlugin):
 
     def can_view(self, data_dict):
         resource = data_dict['package']
-        
         proxy_enabled = p.plugin_loaded('resource_proxy')
         same_domain = datapreview.on_same_domain(data_dict)
         return same_domain or proxy_enabled

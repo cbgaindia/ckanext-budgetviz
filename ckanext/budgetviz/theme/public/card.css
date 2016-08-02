@@ -3,11 +3,10 @@
     margin-bottom: 20px;
     width: 100%;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
-        margin-left: -20px;
+    margin-left: -20px;
 }
 
 .infocard:before {
-   
     float: left;
     height: 280px
 }
@@ -25,7 +24,6 @@
 }
 
 .infocard .content:after {
-    
     display: block;
     clear: both
 }
@@ -228,7 +226,6 @@
 }
 
 .infocard .chart-box:after {
-
     display: block;
     clear: both
 }
