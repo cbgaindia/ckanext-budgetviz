@@ -1,9 +1,4 @@
 {% extends 'dataviewer/base.html' %}
-<style>
-    .infocard{
-      background: #262626 ;
-    }
-    </style>
 {% block page %}
 <div class="infocard">
         <div class="row">
@@ -30,7 +25,9 @@
   <script>
     var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
  
-    
+    var resource ={{ h.literal(h.dump_json(resource)) }};
+
+console.log("from template",resource)
    
   </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>

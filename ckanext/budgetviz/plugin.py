@@ -23,7 +23,7 @@ class Timeseries_IPFS(p.SingletonPlugin):
 
     def info(self):
         return {
-                'name' : 'budgetviz',
+                'name' : 'timeseries_ipfs',
                 'title' : 'Timeseries - IPFS',
                 'icon': 'bar-chart',
                 'iframed': False
@@ -44,6 +44,15 @@ class Timeseries_IPFS(p.SingletonPlugin):
     def view_template(self, context, data_dict):
         return 'timeseries_view.html'
 
+    def setup_template_variables(self, context, data_dict):
+        resource = data_dict['resource']
+        resource_view = data_dict['resource_view']
+        
+     
+
+        return {'resource': resource,
+                'resource_view': resource_view,
+               }
 
 
 

@@ -1,8 +1,11 @@
     //Prepare data for Timeseries
-    var getmungeData = function(data) {
+    /* function mungeData converts data returned from d3.csv to stream data.
+     Each stream would represent one timeseries of a category. In Total six stream would be present*/
 
+    var mungeData = function(data) {
+        
         var parseDate = d3.time.format("%Y").parse;
-        console.log(data)
+        
         var mndata = [];
         for (var i = 0; i < data.length; i++)
 
@@ -13,7 +16,7 @@
             particular.key = data[i].Particulars
             particular.type = data[i].Particulars.substring(data[i].Particulars.indexOf("(") + 1, data[i].Particulars.indexOf(")"));
             var values_arr = []
-            console.log(key)
+        
             for (var j = 0; j < key.length; j++) {
                 var temp = new Object();
                 temp.x = parseDate(key[j].substring(0, 4));
@@ -26,9 +29,10 @@
 
             mndata.push(particular);
         }
+     
         return mndata;
     }
-    //Find possible selection options
+    //Find possible selection categories. 
     var getSelections = function(mndata) {
         var types = new Set()
         for (var i = 0; i < mndata.length; i++) {
@@ -63,24 +67,23 @@
 
 
     var addMiscElements = function() {
-        d3.select("#viz-header").text(toTitleCase("BUDGETARY DEFICIT OF THE CENTRE AND THE STATES"))
+        d3.select("#viz-header").text(toTitleCase(resource.name))
     }
 
 
     var drawchart = function(data, selection) {
 
-        console.log(data,selection)
         nv.addGraph(function() {
-            chart = nv.models.lineWithFocusChart()
-                .color(["#002A4A", "#FF9311", "#D64700", "#17607D"]);
-
-            chart.showLegend(true)
             var xScale = d3.time.scale();
             var mini, max;
             var minmax;
             var formatdate= d3.time.format("%Y").parse;
-            chart.xScale;
 
+            chart = nv.models.lineWithFocusChart()
+                .color(["#002A4A", "#FF9311", "#D64700", "#17607D"]);
+
+            chart.showLegend(true)
+            chart.xScale;
             chart.xAxis
                 .tickFormat(function(d) {
                     return d3.time.format('%Y')(new Date(d))
@@ -89,12 +92,14 @@
                 .tickFormat(function(d) {
                     return d3.time.format('%Y')(new Date(d))
                 });
-            console.log()
+          
             chart.yAxis.axisLabel(selection)
             chart.focusHeight(100)
             chart.pointSize(10)
             chart.brushExtent([formatdate("1952"),formatdate("2012")]);
             chart.useInteractiveGuideline(true);
+            
+
             chartdata = d3.select('#chart svg')
                 .datum(data)
                 .call(chart);
@@ -105,7 +110,7 @@
             chartdata.transition().duration(500).call(chart);
             nv.utils.windowResize(chart.update);
             return chart;
-            console.log(data)
+          
         });
 
     };
@@ -117,7 +122,7 @@
             .attr("id", "scheme-select")
             .on("change", function() {
                 var selection = d3.select("#scheme-select").property("value");
-                console.log(selection)
+              
                 drawchart(getStreamData(data,selection), selection)
             });
 
