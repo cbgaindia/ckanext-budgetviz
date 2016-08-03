@@ -2,7 +2,7 @@
     var getmungeData = function(data) {
 
         var parseDate = d3.time.format("%Y").parse;
-
+        console.log(data)
         var mndata = [];
         for (var i = 0; i < data.length; i++)
 
@@ -13,6 +13,7 @@
             particular.key = data[i].Particulars
             particular.type = data[i].Particulars.substring(data[i].Particulars.indexOf("(") + 1, data[i].Particulars.indexOf(")"));
             var values_arr = []
+            console.log(key)
             for (var j = 0; j < key.length; j++) {
                 var temp = new Object();
                 temp.x = parseDate(key[j].substring(0, 4));
@@ -68,7 +69,7 @@
 
     var drawchart = function(data, selection) {
 
-        console.log(selection)
+        console.log(data,selection)
         nv.addGraph(function() {
             chart = nv.models.lineWithFocusChart()
                 .color(["#002A4A", "#FF9311", "#D64700", "#17607D"]);
@@ -77,6 +78,7 @@
             var xScale = d3.time.scale();
             var mini, max;
             var minmax;
+            var formatdate= d3.time.format("%Y").parse;
             chart.xScale;
 
             chart.xAxis
@@ -87,11 +89,11 @@
                 .tickFormat(function(d) {
                     return d3.time.format('%Y')(new Date(d))
                 });
-
+            console.log()
             chart.yAxis.axisLabel(selection)
             chart.focusHeight(100)
             chart.pointSize(10)
-
+            chart.brushExtent([formatdate("1952"),formatdate("2012")]);
             chart.useInteractiveGuideline(true);
             chartdata = d3.select('#chart svg')
                 .datum(data)
