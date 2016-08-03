@@ -29,7 +29,6 @@ class Timeseries_IPFS(p.SingletonPlugin):
                 'iframed': False
                 }
 
-
     def configure(self, config):
         enabled = config.get('ckan.resource_proxy_enabled', False)
         self.proxy_is_enabled = enabled
@@ -47,8 +46,6 @@ class Timeseries_IPFS(p.SingletonPlugin):
     def setup_template_variables(self, context, data_dict):
         resource = data_dict['resource']
         resource_view = data_dict['resource_view']
-        
-     
 
         return {'resource': resource,
                 'resource_view': resource_view,
