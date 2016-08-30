@@ -1,0 +1,138 @@
+.nvd3 text,
+    .nv-axislabel {
+        font-family: 'Open Sans', sans-serif;
+    }
+    
+    text {
+        font-size: 12px;
+    }
+    
+    svg {
+        display: block;
+    }
+    
+    body {
+        margin: 0 auto;
+    }
+    
+    #chart,
+    svg {
+        margin: 0 auto;
+        padding: 0px;
+        height: 400px;
+        width: 100%;
+        opacity: 0.95;
+    }
+    .infocard{
+        width:100%;
+    }
+    
+    .nvd3 .nv-axis.nv-x path.domain {
+        stroke-opacity: 1;
+    }
+    
+    svg,
+    .nv-background rect {}
+    
+    .nvd3 .nv-axis line {
+        stroke: rgba(0, 0, 0, 0.05);
+        opacity: 0.7;
+    }
+    
+    path.domain {
+        opacity: 0.8;
+    }
+    
+    .nvtooltip.with-3d-shadow,
+    .with-3d-shadow .nvtooltip {
+        border-radius: 3px;
+        font-family: 'Open Sans', sans-serif;
+    }
+    
+    .nv-point {
+        stroke-opacity: 1!important;
+        stroke-width: 1px!important;
+        fill-opacity: 0!important;
+    }
+    
+    .nv-point.hover {
+        stroke-width: 9px!important;
+        fill-opacity: .95 !important;
+        stroke-opacity: .95 !important;
+    }
+    
+    .infocard {
+        background-image: url("body-background.png");
+        padding: 20px;
+    }
+    
+    .viz-header {
+        float: left;
+        font-family: 'Gotham Book', serif;
+        font-size: 25px;
+        padding-left: 20px;
+        padding-top: 10px;
+        opacity: 0.8;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    .scheme-select {
+        float: right;
+    }
+
+    .tick line{
+    opacity: 1;
+    stroke-width:2;
+  }
+
+    label {
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        padding-left: 25px;
+        margin-right: 15px;
+        font-size: 12px;
+    }
+    
+    input[type=radio] {
+        display: none;
+    }
+    
+    label:before {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        position: absolute;
+        left: 0;
+        bottom: 1px;
+        background-color: #aaa;
+        box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    }
+    
+    .radio label:before {
+        border-radius: 8px;
+    }
+    
+    input[type=radio]:checked + label:before {
+        content: "\2022";
+        color: #f3f3f3;
+        font-size: 30px;
+        text-align: center;
+        line-height: 18px;
+    }
+ 
+        
+        #options-select{
+            font-size: 12px;
+            font-family: 'Lora', sans-serif;
+        }
+        #select-list{
+  
+            margin-top: 10px;
+        }
+        .radio{
+            margin-bottom: 10px;
+            padding: 3px;
+        }
