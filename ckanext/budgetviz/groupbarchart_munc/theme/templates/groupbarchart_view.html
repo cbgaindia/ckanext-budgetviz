@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="span5">
-                <div class="scheme-select"></div>
+                <div class="scheme-select">casdasdad</div>
                 
             </div>
         </div>
@@ -35,10 +35,11 @@
     var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
  
     var resource ={{ h.literal(h.dump_json(resource)) }};
+    console.log(resource_url);
   </script>
  
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
  
-  {% resource 'ckanext-budgetviz/main' %}
+  {% resource 'groupbarchart_munc/main' %}
 {% endblock %}
