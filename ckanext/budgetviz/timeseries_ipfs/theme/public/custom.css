@@ -59,7 +59,7 @@ path.domain {
 }
 
 .infocard {
-    /*background: #FCFFF5 url("../../../base/images/bg.png");*/
+    background: #FCFFF5 url("bg.png");
     padding: 20px;
 }
 

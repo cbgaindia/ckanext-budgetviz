@@ -81,7 +81,6 @@ setup(
         [ckan.plugins]
         timeseries_ipfs=ckanext.budgetviz.plugin:Timeseries_IPFS
         groupbarchart_munc=ckanext.budgetviz.plugin:GroupBarChart_Munc
-        timeseries_rbi=ckanext.budgetviz.plugin:Timeseries_RBI
 	[babel.extractors]
 	ckan = ckan.lib.extract:extract_ckan
     ''',
