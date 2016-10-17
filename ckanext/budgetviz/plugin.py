@@ -17,8 +17,8 @@ class Timeseries_IPFS(p.SingletonPlugin):
     def update_config(self, config):
         p.toolkit.add_public_directory(config, 'timeseries_ipfs/theme/public')
         p.toolkit.add_template_directory(config ,'timeseries_ipfs/theme/templates')
-        p.toolkit.add_resource('timeseries_ipfs/theme/public', 'ckanext-budgetviz')
-
+       
+        p.toolkit.add_resource('timeseries_ipfs/theme/public', 'timeseriesipfs')
     proxy_is_enabled = False
 
     def info(self):
@@ -64,7 +64,8 @@ class GroupBarChart_Munc(p.SingletonPlugin):
     def update_config(self, config):
         p.toolkit.add_public_directory(config, 'groupbarchart_munc/theme/public')
         p.toolkit.add_template_directory(config ,'groupbarchart_munc/theme/templates')
-        p.toolkit.add_resource('groupbarchart_munc/theme/public', 'ckanext-budgetviz')
+
+        p.toolkit.add_resource('groupbarchart_munc/theme/public', 'groupbarchart_munc')
 
     proxy_is_enabled = False
 
