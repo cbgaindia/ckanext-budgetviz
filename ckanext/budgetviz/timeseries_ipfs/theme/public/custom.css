@@ -1,6 +1,6 @@
 .nvd3 text,
 .nv-axislabel {
-    font-family: 'Open Sans', sans-serif;
+
 }
 
 text {
@@ -22,6 +22,7 @@ svg {
     height: 400px;
     width: 100%;
     opacity: 0.95;
+ 
 }
 
 .nvd3 .nv-axis.nv-x path.domain {
@@ -43,7 +44,7 @@ path.domain {
 .nvtooltip.with-3d-shadow,
 .with-3d-shadow .nvtooltip {
     border-radius: 3px;
-    font-family: 'Open Sans', sans-serif;
+
 }
 
 .nv-point {
@@ -59,13 +60,13 @@ path.domain {
 }
 
 .infocard {
-    background: #FCFFF5 url("bg.png");
+   
     padding: 20px;
 }
 
 .viz-header {
     float: left;
-    font-family: 'Lora', serif;
+    font-family: 'Gotham Medium', serif;
     font-size: 22px;
     padding-left: 20px;
     padding-top: 10px;
@@ -73,6 +74,16 @@ path.domain {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-.scheme-select {
-    float: right;
+
+#vis-navbar{
+    width:250px;
+    position: relative;
+}
+
+.btn, label {
+    font-weight: normal;
+}
+
+.visbtn:hover, .visbtn:focus, .visbtn:active, .visbtn.active, .visbtn.disabled, .visbtn[disabled] {
+    background-color: #dad6d6;
 }

@@ -74,9 +74,7 @@ ckan.module('timeseries_ipfs-main', function ($, _) {
         }
 
 
-        var addMiscElements = function() {
-        d3.select("#viz-header").text(toTitleCase(resource.name));
-        };
+      
 
 
         var drawchart = function(data, selection) {
@@ -123,36 +121,36 @@ ckan.module('timeseries_ipfs-main', function ($, _) {
         };
 
         var populateSelection = function(data, selectionList) {
-        var select = d3.select("body").select("div.scheme-select")
-            .append("select")
-            .attr("class", "form-control select-picker")
-            .attr("id", "scheme-select")
-            .on("change", function() {
-                var selection = d3.select("#scheme-select").property("value");
+        var select = d3.select("body").select("div.option-select")
+            .append("div")
+            .attr("class", "btn-group")
+            ;
 
-                drawchart(getStreamData(data, selection), selection);
-            });
+
 
         select
-            .selectAll("option")
+            .selectAll("button")
             .data(selectionList)
-            .enter().append("option")
-            .attr("class", "options")
+            .enter().append("button")
+            .attr("class", "btn visbtn")
             .attr("value", function(d) {
                 return d;
             })
             .text(function(d) {
                 return d;
             })
-            .style("margin", "0px 0px 0px 0px");
+            .on("click", function(d) {
+                console.log(d);
+                //var selection = d3.select("#opention-select").property("value");
 
-        };
+                drawchart(getStreamData(data, d), d);
+            });
 
 
-
+}
         mungeddata = mungeData(data)
         selections = getSelections(mungeddata);
-        addMiscElements();
+
         populateSelection(mungeddata, selections);
         drawchart(getStreamData(mungeddata, selections[0]), selections[0]);
     });
