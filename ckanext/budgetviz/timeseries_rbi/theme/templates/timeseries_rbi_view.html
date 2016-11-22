@@ -1,32 +1,25 @@
-
+{% extends 'dataviewer/base.html' %}
 {% block page %}
-
-  <div class="row">
-    <div class="span5 ">
-        <div class="option-select">Figures in - </div>
+  <div class="row-fluid">
+    <div class="span7">
+        <div class="viz-header">{{ resource['name'] }}</div>
     </div>
   </div>
-  <div class="row">
-    <div id="chart" class='with-3d-shadow with-transitions'>
+  <div class="row-fluid">
+    <div id="chart" class='chart-container'>
       <svg></svg>
     </div>
   </div>
-
 {% endblock %}
 
 {% block scripts %}
-
+  {{ super() }}
 
   <script>
     var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
- 
     var resource ={{ h.literal(h.dump_json(resource)) }};
-     console.log(resource_url);
-     
   </script>
-
-   
   <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
- 
-  {% resource 'timeseriesipfs/main' %}
+  {% resource 'base_css/budgetviz_base.css' %}
+  {% resource 'timeseriesrbi/main' %}
 {% endblock %}

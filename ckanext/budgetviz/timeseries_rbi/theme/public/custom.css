@@ -1,75 +1,9 @@
-   .nvd3 text,.nv-axislabel{
-        font-family: 'Open Sans', sans-serif;
-    }
+#chart,
+svg {
+    margin-top: 0px;
+    height: 550px;
+}
 
-    text {
-        font-size: 12px ;
-    }
-    
-    svg {
-        display: block;
-    }
-    
-    body {
-        margin: 0 auto;
-    }
-    
-    #chart, svg {
-        margin: 0 auto;
-     
-        height: 450px;
-        width: 100%;
-        opacity: 0.95;
-        margin-top: -20px;
-        padding-left:20px;
-    }
-    
-    .nvd3 .nv-axis.nv-x path.domain {
-        stroke-opacity: 1;
-    }
-    
-    .nvd3 .nv-axis line {
-        stroke: rgba(0, 0, 0, 0.05);
-        opacity: 0.7;
-    }
-    path.domain{
-        opacity: 0.2;
-    }
-    .nvtooltip.with-3d-shadow, .with-3d-shadow .nvtooltip{
-        border-radius: 3px; 
-        font-family: 'Open Sans', sans-serif;
-    }
-   
-    .nv-point {
-        stroke-opacity: 1!important;
-        stroke-width: 1px!important;
-        fill-opacity: 0!important;
-    }
-    
-    .nv-point.hover {
-        stroke-width: 9px!important;
-        fill-opacity: .95 !important;
-        stroke-opacity: .95 !important;
-    }
-    
-    .infocard {
-        background-image: url("body-background.png");
-        padding: 20px;
-    }
-    
-    .viz-header {
-        float: left;
-        font-family: 'Gotham Book', serif;
-        font-size:22px;
-        padding-left: 20px;
-      
-        opacity: 0.8;
-        text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-    }
-    
-    .scheme-select {
-        float: right;
-    }
-    hr{
-        margin-top: 0px;
-    }
+.option-select {
+    float: right;
+}
