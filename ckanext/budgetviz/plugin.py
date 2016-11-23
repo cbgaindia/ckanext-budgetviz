@@ -5,7 +5,7 @@ import ckan.lib.datapreview as datapreview
 
 log = logging.getLogger(__name__)
 
-class Timeseries_IPFS(p.SingletonPlugin):
+class TimeseriesIPFSBudget(p.SingletonPlugin):
 
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IConfigurable, inherit=True)
@@ -48,7 +48,7 @@ class Timeseries_IPFS(p.SingletonPlugin):
                 'resource_view': resource_view,
                }
 
-class GroupBarChart_Munc(p.SingletonPlugin):
+class GroupBarChartMuncBudget(p.SingletonPlugin):
 
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IConfigurable, inherit=True)
@@ -92,7 +92,7 @@ class GroupBarChart_Munc(p.SingletonPlugin):
                 'resource_view': resource_view,
                }
 
-class Timeseries_RBI(p.SingletonPlugin):
+class TimeseriesRBIBudget(p.SingletonPlugin):
 
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IConfigurable, inherit=True)
@@ -136,7 +136,7 @@ class Timeseries_RBI(p.SingletonPlugin):
                 'resource_view': resource_view,
                }
 
-class Timeseries_Union(p.SingletonPlugin):
+class TimeseriesUnionBudget(p.SingletonPlugin):
 
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IConfigurable, inherit=True)

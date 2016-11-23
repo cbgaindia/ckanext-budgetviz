@@ -35,7 +35,8 @@ svg,
 
 .nvd3 .nv-axis line {
     stroke: rgba(0, 0, 0, 0.05);
-    opacity: 0.2;
+    opacity: 0.9;
+    stroke-width:1;
 }
 
 path.domain {
@@ -63,11 +64,11 @@ path.domain {
 .viz-header {
     float: left;
     color: rgb(0, 0, 0);
-    padding-left: 20px;
-    padding-top: 10px;
+    padding-left: 0px;
+    padding: 10px 0px;
     opacity: 0.8;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-    font-size: 22px;
+    font-size: 20px;
     opacity: 0.8;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
@@ -98,8 +99,12 @@ path.domain {
     fill-opacity: 1;
 }
 
+.nvd3 .tick line { stroke-dasharray: 4,1; }
 
 
+@media (max-width: 480px){
+
+}
 
 
 

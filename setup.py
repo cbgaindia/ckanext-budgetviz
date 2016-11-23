@@ -79,10 +79,10 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points='''
         [ckan.plugins]
-        timeseries_ipfs=ckanext.budgetviz.plugin:Timeseries_IPFS
-        groupbarchart_munc=ckanext.budgetviz.plugin:GroupBarChart_Munc
-        timeseries_rbi=ckanext.budgetviz.plugin:Timeseries_RBI
-        timeseries_union=ckanext.budgetviz.plugin:Timeseries_Union
+        timeseries_ipfs=ckanext.budgetviz.plugin:TimeseriesIPFSBudget
+        groupbarchart_munc=ckanext.budgetviz.plugin:GroupBarChartMuncBudget
+        timeseries_rbi=ckanext.budgetviz.plugin:TimeseriesRBIBudget
+        timeseries_union=ckanext.budgetviz.plugin:TimeseriesUnionBudget
 	[babel.extractors]
 	ckan = ckan.lib.extract:extract_ckan
     ''',

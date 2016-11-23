@@ -8,7 +8,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
 
                 var mungeData = function(data) {
                     var parseDate = d3.time.format("%Y").parse;
-                    var mndata = [];
+                    var tempDataObject = [];
                     for (var i = 0; i < data.length; i++) {
                         var key = Object.keys(data[i])
                         key.shift();
@@ -24,27 +24,27 @@ ckan.module('timeseries_ipfs-main', function($, _) {
 
                         }
                         particular.values = values_arr
-                        mndata.push(particular);
+                        tempDataObject.push(particular);
                     }
-                    return mndata;
+                    return tempDataObject;
                 }
 
                 //Find possible selection categories. 
-                var getSelections = function(mndata) {
+                var getSelections = function(tempDataObject) {
                     var types = new Set();
-                    for (var i = 0; i < mndata.length; i += 1) {
-                        types.add(mndata[i].type);
+                    for (var i = 0; i < tempDataObject.length; i += 1) {
+                        types.add(tempDataObject[i].type);
                     }
-                    var selection = mndata[0].type;
+                    var selection = tempDataObject[0].type;
                     return Array.from(types);
                 };
 
                 //Get Stream data for selected selection.
-                var getStreamData = function(mndata, selection) {
+                var getStreamData = function(tempDataObject, selection) {
                     var selected_data = [];
-                    for (var j = 0; j < mndata.length; j += 1) {
-                        if (mndata[j].type == selection) {
-                            selected_data.push(mndata[j]);
+                    for (var j = 0; j < tempDataObject.length; j += 1) {
+                        if (tempDataObject[j].type == selection) {
+                            selected_data.push(tempDataObject[j]);
                         }
                     }
                     return selected_data;
@@ -119,10 +119,10 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                         });
                 }
 
-                var mungeddata = mungeData(data)
-                var selections = getSelections(mungeddata);
-                populateSelection(mungeddata, selections);
-                drawchart(getStreamData(mungeddata, selections[0]), selections[0]);
+                var mungedData = mungeData(data)
+                var selections = getSelections(mungedData);
+                populateSelection(mungedData, selections);
+                drawchart(getStreamData(mungedData, selections[0]), selections[0]);
             });
         }()
     };
