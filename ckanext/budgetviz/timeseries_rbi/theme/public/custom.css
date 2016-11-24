@@ -1,0 +1,9 @@
+#chart,
+svg {
+    margin-top: 0px;
+    height: 550px;
+}
+
+.option-select {
+    float: right;
+}

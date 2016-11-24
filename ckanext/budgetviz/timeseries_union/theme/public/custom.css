@@ -1,0 +1,19 @@
+#chart,
+svg {
+    padding: 0px;
+    height: 450px;
+}
+
+.viz-outer-container {
+    margin-top: 50px;
+}
+
+#item-select {
+    height: 430px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.nav-stacked > li {
+    font-size: 13px;
+}

@@ -1,0 +1,26 @@
+#chart,
+svg {
+    margin-top: 40px;
+    height: 450px;
+}
+
+.btn,
+label {
+    font-weight: normal;
+}
+
+.visbtn:hover,
+.visbtn:focus,
+.visbtn:active,
+.visbtn.active,
+.visbtn.disabled,
+.visbtn[disabled] {
+    background-color: #dad6d6;
+}
+
+.option-select {
+    float: right;
+}
+
+
+
