@@ -75,7 +75,7 @@ ckan.module('groupbarchart-view', function($, _) {
                         .datum(data)
                         .call(chart);
 
-                     chartdata.transition().duration(500).call(chart);
+                    chartdata.transition().duration(500).call(chart);
                     nv.utils.windowResize(chart.update);
 
                     return chart;

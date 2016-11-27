@@ -15,9 +15,14 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                         .selectAll("li")
                         .data(data)
                         .enter().append("li")
+                        .attr("class", function(d, i) {
+                            if(i==0){
+                                return "active";
+                            }
+                        })
                         .on("click", function(d) {
-                        drawchart(d);
-                    })
+                            drawchart(d);
+                        })
 
                     select.append("a")
                         .attr({
@@ -25,8 +30,8 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             href: "#"
                         })
                         .text(function(d) {
-                        return d.name
-                    })
+                            return d.name
+                        })
 
                     $(".nav a").on("click", function() {
                         $(".nav").find(".active").removeClass("active");
@@ -37,33 +42,31 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                 function drawchart(data) {
                     nv.addGraph(function() {
                         var chartdata;
-                        //var formatdate = d3.time.format("%Y").parse;
                         var maxValue = d3.max(data.series, function(d) {
                             return d3.max(d.values, function(d) {
-                                return +d.value; }) });
+                                return +d.value;
+                            })
+                        });
 
                         var minValue = d3.min(data.series, function(d) {
                             return d3.min(d.values, function(d) {
-                                return d.value; }) });
+                                return d.value;
+                            })
+                        });
 
                         var chart = nv.models.lineWithFocusChart()
                             .color(["#002A4A", "#FF9311", "#D64700", "#17607D"])
                             .x(function(d) {
-                                return parseInt((d.label).substring(0, 4)); })
+                                return parseInt((d.label).substring(0, 4));
+                            })
                             .y(function(d) {
-                                return d.value });
+                                return d.value
+                            });
                         chart.focusHeight(100);
                         chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 50 })
                         chart.yAxis.axisLabelDistance(30)
                         chart.yAxis.ticks(10)
-                        /*if (maxValue < 0) {
-                            maxValue = 0;
-                        }
-                        if (minValue > 0) {
-                            minValue = 0;
-                        }
-                        chart.yDomain([minValue, maxValue]);
-                        */
+                         
                         chart.yAxis
                             .tickFormat(d3.format(',.1f'));
 
