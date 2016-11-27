@@ -7,9 +7,11 @@
     margin-top: 10px;
 }
 
-
+#chart{
+	height: 450px;
+}
 
 .chartarea {
     margin-top: 20px;
-    height: 400px;
+    height: 450px;
 }
