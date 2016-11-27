@@ -103,21 +103,38 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                         .append("div")
                         .attr("class", "btn-group");
 
-                    select
+                    var select_buttons=select
                         .selectAll("button")
                         .data(selectionList)
-                        .enter().append("button")
-                        .attr("class", "btn visbtn")
+                        .enter().append("button");
+
+                        select_buttons
                         .attr("value", function(d) {
                             return d;
                         })
+                        .attr("class", function(d, i) {
+                            if(i==0){
+                                return "active";
+                            }
+                        })
+                        .classed("btn visbtn", true)
+
+
                         .text(function(d) {
                             return d;
                         })
-                        .on("click", function(d) {
+                        .on("click", function(d, i) {
                             drawchart(getStreamData(data, d), d);
+                            select_buttons.classed("active", function (d, i) {
+                              return !d3.select(this).classed("active");
+                            });
                         });
+
+
+                       
+                   
                 }
+
 
                 var mungedData = mungeData(data)
                 var selections = getSelections(mungedData);

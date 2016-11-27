@@ -15,7 +15,13 @@ ckan.module('groupbarchart-view', function($, _) {
                     .selectAll("li")
                     .data(data)
                     .enter().append("li")
-                    .attr("class", "elem")
+                    .attr("class", function(d, i) {
+                            if(i==0){
+                                return "active";
+                            }
+                        })
+                    .classed("elem", true)
+                    
                     .on("click", function(d) {
                         drawchart(d);
                     })
