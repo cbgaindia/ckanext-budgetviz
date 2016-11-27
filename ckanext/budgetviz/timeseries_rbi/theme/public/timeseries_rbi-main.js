@@ -70,6 +70,9 @@ ckan.module('groupbarchart-view', function($, _) {
                     chart.legendPosition("top");
                     chart.legend.align("center")
                         //chart.legend.padding(30)
+                    chart.xAxis.axisLabelDistance(20)
+                    chart.focusMargin({ "top": 20 });
+
                     chart.useInteractiveGuideline(true);
                     var chartdata = d3.select('#chart svg')
                         .datum(data)

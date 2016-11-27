@@ -79,7 +79,7 @@ ckan.module('groupbarchart-view', function($, _) {
                     }
                     chart.yDomain([minValue, maxValue]);
 
-                    chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 50 })
+                    chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 70 })
                     chart.yAxis
                         .tickFormat(d3.format(',.1f'));
 
@@ -87,6 +87,8 @@ ckan.module('groupbarchart-view', function($, _) {
                     chart.yAxis.axisLabel(data.name);
                     chart.yAxis.axisLabelDistance(30)
                     chart.yAxis.ticks(10)
+                    chart.xAxis.axisLabelDistance(20)
+                    
 
                     chartdata = d3.select('#chart svg')
                         .datum(data.series)

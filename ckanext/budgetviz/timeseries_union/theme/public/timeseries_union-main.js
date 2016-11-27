@@ -62,14 +62,15 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             .y(function(d) {
                                 return d.value
                             });
-                        chart.focusHeight(100);
+                        chart.focusHeight(110);
                         chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 50 })
                         chart.yAxis.axisLabelDistance(30)
+                        chart.xAxis.axisLabelDistance(20)
                         chart.yAxis.ticks(10)
-                         
+                        chart.focusMargin({ "top": 20 });
                         chart.yAxis
                             .tickFormat(d3.format(',.1f'));
-
+                       
                         chart.xAxis.axisLabel("Year");
                         chart.yAxis.axisLabel(data.name);
                         //chart.brushExtent([formatdate("2006"), formatdate("2016")]);
