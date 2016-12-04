@@ -70,7 +70,8 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                         chart.focusMargin({ "top": 20 });
                         chart.yAxis
                             .tickFormat(d3.format(',.1f'));
-                       
+                        chart.useInteractiveGuideline(true);
+                        chart.tooltip.contentGenerator(function (obj) { return JSON.stringify(obj)});
                         chart.xAxis.axisLabel("Year");
                         chart.yAxis.axisLabel(data.name);
                         //chart.brushExtent([formatdate("2006"), formatdate("2016")]);
@@ -84,6 +85,27 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                     });
                 }
 
+                function add_notes() {
+                try {
+                    var extra_fields = package_details.extras
+                    var unit;
+                    for (var i in extra_fields) {
+                        console.log(extra_fields[i]);
+                        if (extra_fields[i].key == "Unit") {
+                            unit = extra_fields[i].value;
+                        }
+                    }
+                    d3.select(".notes-content")
+                        .text(function(d) {
+                            return unit;
+                        })
+                    d3.select(".notes-heading")
+                        .text(function(d) {
+                            return "Note :";
+                        })
+                    } catch (err) {}
+                }
+                add_notes();
                 populateSelection(data);
                 drawchart(data[0])
             });

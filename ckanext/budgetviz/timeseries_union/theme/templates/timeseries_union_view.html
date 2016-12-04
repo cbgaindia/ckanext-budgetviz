@@ -13,12 +13,23 @@
       </div>
     </div>
   </div>
+  <div class="row-fluid notes">
+    <div class="notes-container">
+      <span class ="notes-heading">
+      
+      </span>
+      <span class="notes-content">
+      </span>
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block scripts %}
   <script>
     var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
     var resource ={{ h.literal(h.dump_json(resource)) }};
+    var package_details = {{ h.literal(h.dump_json(package)) }}
   </script>
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>

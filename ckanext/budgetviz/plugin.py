@@ -43,9 +43,11 @@ class TimeseriesIPFSBudget(p.SingletonPlugin):
     def setup_template_variables(self, context, data_dict):
         resource = data_dict['resource']
         resource_view = data_dict['resource_view']
+        package = data_dict['package']
 
         return {'resource': resource,
                 'resource_view': resource_view,
+                'package' : package,
                }
 
 class GroupBarChartMuncBudget(p.SingletonPlugin):
@@ -87,9 +89,11 @@ class GroupBarChartMuncBudget(p.SingletonPlugin):
     def setup_template_variables(self, context, data_dict):
         resource = data_dict['resource']
         resource_view = data_dict['resource_view']
+        package = data_dict['package']
 
         return {'resource': resource,
                 'resource_view': resource_view,
+                'package' : package,
                }
 
 class TimeseriesRBIBudget(p.SingletonPlugin):
@@ -131,9 +135,11 @@ class TimeseriesRBIBudget(p.SingletonPlugin):
     def setup_template_variables(self, context, data_dict):
         resource = data_dict['resource']
         resource_view = data_dict['resource_view']
+        package = data_dict['package']
 
         return {'resource': resource,
                 'resource_view': resource_view,
+                'package' : package,
                }
 
 class TimeseriesUnionBudget(p.SingletonPlugin):
@@ -175,11 +181,12 @@ class TimeseriesUnionBudget(p.SingletonPlugin):
     def setup_template_variables(self, context, data_dict):
         resource = data_dict['resource']
         resource_view = data_dict['resource_view']
+        package = data_dict['package']
 
         return {'resource': resource,
                 'resource_view': resource_view,
+                'package' : package,
                }
-
 
 
   

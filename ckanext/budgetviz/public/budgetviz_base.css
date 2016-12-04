@@ -101,6 +101,9 @@ path.domain {
 
 .nvd3 .tick line { stroke-dasharray: 4,1; }
 
+.row-fluid.notes {
+    font-size: 80%;
+}
 
 @media (max-width: 480px){
 

@@ -35,8 +35,7 @@ ckan.module('groupbarchart-view', function($, _) {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                 });
             }
-
-
+            
             var addMiscElements = function() {
                 d3.select("#viz-header").text(toTitleCase(resource.name));
             }
@@ -73,7 +72,6 @@ ckan.module('groupbarchart-view', function($, _) {
                     chart.xAxis.axisLabelDistance(20)
                     chart.focusMargin({ "top": 20 });
 
-                    chart.useInteractiveGuideline(true);
                     var chartdata = d3.select('#chart svg')
                         .datum(data)
                         .call(chart);

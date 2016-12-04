@@ -16,15 +16,15 @@ ckan.module('groupbarchart-view', function($, _) {
                     .data(data)
                     .enter().append("li")
                     .attr("class", function(d, i) {
-                            if(i==0){
-                                return "active";
-                            }
-                        })
-                    .classed("elem", true)
-                    
-                    .on("click", function(d) {
-                        drawchart(d);
+                        if (i == 0) {
+                            return "active";
+                        }
                     })
+                    .classed("elem", true)
+
+                .on("click", function(d) {
+                    drawchart(d);
+                })
 
                 select.append("a")
                     .attr({
@@ -44,7 +44,7 @@ ckan.module('groupbarchart-view', function($, _) {
             function drawchart(data) {
                 nv.addGraph(function() {
                     var chartdata;
-                    
+
                     var maxValue = d3.max(data.series, function(d) {
                         return d3.max(d.values, function(d) {
                             return +d.value;
@@ -88,7 +88,6 @@ ckan.module('groupbarchart-view', function($, _) {
                     chart.yAxis.axisLabelDistance(30)
                     chart.yAxis.ticks(10)
                     chart.xAxis.axisLabelDistance(20)
-                    
 
                     chartdata = d3.select('#chart svg')
                         .datum(data.series)
@@ -101,8 +100,30 @@ ckan.module('groupbarchart-view', function($, _) {
                 });
             }
 
+            function add_notes() {
+                try {
+                    var extra_fields = package_details.extras
+                    var unit;
+                    for (var i in extra_fields) {
+                        console.log(extra_fields[i]);
+                        if (extra_fields[i].key == "Unit") {
+                            unit = extra_fields[i].value;
+                        }
+                    }
+                    d3.select(".notes-content")
+                        .text(function(d) {
+                            return unit;
+                        })
+                    d3.select(".notes-heading")
+                        .text(function(d) {
+                            return "Note :";
+                        })
+                } catch (err) {}
+            }
+
             d3.json(resource_url, function(data) {
                 addMiscElements();
+                add_notes()
                 populateSelection(data);
                 drawchart(data[0])
             });
