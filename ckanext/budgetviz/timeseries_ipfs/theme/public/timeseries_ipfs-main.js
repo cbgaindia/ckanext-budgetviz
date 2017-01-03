@@ -5,7 +5,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
         initialize: function() {
             //d3.csv sends an HTTP GET request using resource_url provided from the template.
             d3.csv(resource_url, function(error, data) {
-
+                console.log(data[0])
                 var mungeData = function(data) {
                     var parseDate = d3.time.format("%Y").parse;
                     var tempDataObject = [];
@@ -38,6 +38,17 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                     return Array.from(types);
                 };
 
+                var listYears = function(tempDataObject){
+                    var parseDate = d3.time.format("%Y").parse;
+                    var key = Object.keys(tempDataObject)
+                        key.shift();
+                        for (var j = 0; j < key.length; j++) {
+                            key[j] = (key[j].substring(0, 4));
+                        }
+                        return key;
+
+                }
+
                 //Get Stream data for selected selection.
                 var getStreamData = function(tempDataObject, selection) {
                     var selected_data = [];
@@ -55,8 +66,9 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                     });
                 }
 
-                var drawchart = function(data, selection) {
+                var drawchart = function(data, selection, year_list) {
                     nv.addGraph(function() {
+                        console.log(data);
                         var formatdate = d3.time.format("%Y").parse;
                         var chart = nv.models.lineWithFocusChart()
                             .color(["#002A4A", "#FF9311", "#D64700", "#17607D"]);
@@ -83,7 +95,8 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                         chart.focusHeight(150);
                         chart.focusMargin({ "top": 50 });
                         chart.pointSize(10);
-                        chart.brushExtent([formatdate("1953"), formatdate("2012")]);
+                        console.log(year_list)
+                        chart.brushExtent([formatdate(year_list[parseInt(year_list.length/10)]), formatdate(year_list[year_list.length - 1])]);
                         chart.useInteractiveGuideline(true);
                         chart.yAxis.axisLabelDistance(20)
 
@@ -121,7 +134,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             return d;
                         })
                         .on("click", function(d, i) {
-                            drawchart(getStreamData(data, d), d);
+                            drawchart(getStreamData(data, d), d, listYears(data[0]));
                             select_buttons.classed("active", function(d, i) {
                                 return !d3.select(this).classed("active");
                             });
@@ -131,7 +144,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                 var mungedData = mungeData(data);
                 var selections = getSelections(mungedData);
                 populateSelection(mungedData, selections);
-                drawchart(getStreamData(mungedData, selections[0]), selections[0]);
+                drawchart(getStreamData(mungedData, selections[0]), selections[0], listYears(data[0]));
             });
         }()
     };
