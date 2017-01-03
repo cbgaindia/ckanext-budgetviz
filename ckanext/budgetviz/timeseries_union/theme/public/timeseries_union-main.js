@@ -60,7 +60,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                                 return parseInt((d.label).substring(0, 4));
                             })
                             .y(function(d) {
-                                return d.value
+                                return parseFloat(d.value)
                             });
                         chart.focusHeight(110);
                         chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 50 })
@@ -87,24 +87,43 @@ ckan.module('timeseries_ipfs-main', function($, _) {
 
                 function add_notes() {
                 try {
+
                     var extra_fields = package_details.extras
-                    var unit;
+                    var unit, note;
                     for (var i in extra_fields) {
                         console.log(extra_fields[i]);
                         if (extra_fields[i].key == "Unit") {
                             unit = extra_fields[i].value;
                         }
+                        if (extra_fields[i].key == "Note") {
+                            note = extra_fields[i].value;
+                        }
                     }
-                    d3.select(".notes-content")
-                        .text(function(d) {
-                            return unit;
-                        })
-                    d3.select(".notes-heading")
-                        .text(function(d) {
-                            return "Note :";
-                        })
-                    } catch (err) {}
+                    if (note) {
+                        d3.select(".notes-content")
+                            .text(function(d) {
+                                return unit;
+                            })
+                        d3.select(".notes-heading")
+                            .text(function(d) {
+                                return "Unit :";
+                            })
+                    }
+                    if (unit) {
+                        d3.select(".unit-note-content")
+                            .text(function(d) {
+                                return note;
+                            })
+                        d3.select(".unit-note-heading")
+                            .text(function(d) {
+                                return "Note :";
+                            })
+                    }
+
                 }
+             catch (err) {}
+
+        }
                 add_notes();
                 populateSelection(data);
                 drawchart(data[0])
