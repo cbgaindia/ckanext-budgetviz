@@ -115,7 +115,7 @@ ckan.module('groupbarchart-view', function($, _) {
                             note = extra_fields[i].value;
                         }
                     }
-                    if (note) {
+                    if (unit) {
                         d3.select(".notes-content")
                             .text(function(d) {
                                 return unit;
@@ -125,7 +125,7 @@ ckan.module('groupbarchart-view', function($, _) {
                                 return "Unit :";
                             })
                     }
-                    if (unit) {
+                    if (note) {
                         d3.select(".unit-note-content")
                             .text(function(d) {
                                 return note;
