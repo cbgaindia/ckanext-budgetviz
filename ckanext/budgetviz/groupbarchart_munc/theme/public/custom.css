@@ -5,6 +5,9 @@
 
 #select-list {
     margin-top: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+        height: 430px;
 }
 
 #chart{
