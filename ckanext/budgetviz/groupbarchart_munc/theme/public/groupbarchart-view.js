@@ -47,12 +47,12 @@ ckan.module('groupbarchart-view', function($, _) {
 
                     var maxValue = d3.max(data.series, function(d) {
                         return d3.max(d.values, function(d) {
-                            return +d.value;
+                            return parseFloat(d.value);
                         })
                     });
                     var minValue = d3.min(data.series, function(d) {
                         return d3.min(d.values, function(d) {
-                            return d.value;
+                            return parseFloat(d.value);
                         })
                     });
 
@@ -62,7 +62,7 @@ ckan.module('groupbarchart-view', function($, _) {
                             return d.label
                         })
                         .y(function(d) {
-                            return d.value
+                            return parseFloat(d.value);
                         })
                         .reduceXTicks(false) //If 'false', every single x-axis tick label will be rendered.
                         .rotateLabels(0) //Angle to rotate x-axis labels.
@@ -83,6 +83,7 @@ ckan.module('groupbarchart-view', function($, _) {
                     chart.yAxis
                         .tickFormat(d3.format(',.1f'));
 
+
                     chart.xAxis.axisLabel("Year");
                     chart.yAxis.axisLabel(data.name);
                     chart.yAxis.axisLabelDistance(30)
@@ -102,31 +103,50 @@ ckan.module('groupbarchart-view', function($, _) {
 
             function add_notes() {
                 try {
+
                     var extra_fields = package_details.extras
-                    var unit;
+                    var unit, note;
                     for (var i in extra_fields) {
                         console.log(extra_fields[i]);
                         if (extra_fields[i].key == "Unit") {
                             unit = extra_fields[i].value;
                         }
+                        if (extra_fields[i].key == "Note") {
+                            note = extra_fields[i].value;
+                        }
                     }
-                    d3.select(".notes-content")
-                        .text(function(d) {
-                            return unit;
-                        })
-                    d3.select(".notes-heading")
-                        .text(function(d) {
-                            return "Note :";
-                        })
-                } catch (err) {}
-            }
+                    if (note) {
+                        d3.select(".notes-content")
+                            .text(function(d) {
+                                return unit;
+                            })
+                        d3.select(".notes-heading")
+                            .text(function(d) {
+                                return "Unit :";
+                            })
+                    }
+                    if (unit) {
+                        d3.select(".unit-note-content")
+                            .text(function(d) {
+                                return note;
+                            })
+                        d3.select(".unit-note-heading")
+                            .text(function(d) {
+                                return "Note :";
+                            })
+                    }
+
+                }
+             catch (err) {}
+
+        }
 
             d3.json(resource_url, function(data) {
-                addMiscElements();
-                add_notes()
-                populateSelection(data);
-                drawchart(data[0])
-            });
-        }()
-    };
+            addMiscElements();
+            add_notes()
+            populateSelection(data);
+            drawchart(data[0])
+        });
+    }()
+};
 });
