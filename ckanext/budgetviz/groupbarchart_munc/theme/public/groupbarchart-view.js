@@ -83,7 +83,7 @@ ckan.module('groupbarchart-view', function($, _) {
                     chart.yAxis
                         .tickFormat(d3.format(',.1f'));
 
-
+                    chart.noData("The record has no values in the budget document.");
                     chart.xAxis.axisLabel("Year");
                     chart.yAxis.axisLabel(data.name);
                     chart.yAxis.axisLabelDistance(30)
