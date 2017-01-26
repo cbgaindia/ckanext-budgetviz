@@ -1,6 +1,6 @@
 #chart,
 svg {
-    padding: 0px;
+    padding: 0px 10px;
     height: 500px;
 }
 
@@ -9,11 +9,19 @@ svg {
 }
 
 #item-select {
-    height: 430px;
+	    border: 1px solid #ddd;
+    height: 460px;
     overflow: scroll;
     overflow-x: hidden;
 }
 
 .nav-stacked > li {
     font-size: 13px;
+}
+
+.nvd3 g.nv-groups path.nv-line {
+  stroke-width: 2px;
+}
+    .nvd3 .nv-axis.nv-x path.domain {
+  stroke-opacity: 1!important;
 }

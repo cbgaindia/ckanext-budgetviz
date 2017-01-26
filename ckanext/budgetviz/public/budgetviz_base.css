@@ -64,8 +64,9 @@ path.domain {
 .viz-header {
     float: left;
     color: rgb(0, 0, 0);
-    padding-left: 0px;
     padding: 10px 0px;
+    padding-left: 10px;
+    
     opacity: 0.8;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     font-size: 20px;
@@ -100,8 +101,8 @@ path.domain {
     fill-opacity: 1;
 }
 
-.nvd3 .tick line { stroke-dasharray: 4,1; }
-
+/*.nvd3 .tick line { stroke-dasharray: 4,1; }
+*/
 .row-fluid.notes {
     font-size: 80%;
 }
@@ -110,5 +111,21 @@ path.domain {
 
 }
 
+#item-select ul.nav.nav-tabs.nav-stacked, #select-list ul.nav.nav-tabs.nav-stacked {
+    margin-bottom: 0px;
+}
 
+.nvd3 .tick text {
+    /* fill: rgba(0, 0, 0, 0.87); */
+    font: normal 12px Open Sans;
+}
 
+.nv-context .nv-background rect {
+    stroke: black;
+    stroke-width: 1;
+    stroke-opacity: 0.2;
+}
+
+.viscontainer{
+    overflow: hidden;
+}
