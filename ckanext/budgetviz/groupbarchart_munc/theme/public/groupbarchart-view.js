@@ -41,6 +41,27 @@ ckan.module('groupbarchart-view', function($, _) {
                 });
             }
 
+            var formatNumber = d3.format(".1f"),
+                    formatCrore = function(x) {
+                        return formatNumber(x / 1e7) + "Cr";
+                    },
+                    formatLakh = function(x) {
+                        return formatNumber(x / 1e5) + "L";
+                    },
+                    formatThousand = function(x) {
+                        return formatNumber(x / 1e3) + "k";
+                    },
+                    formatLowerDenom = function(x) {
+                        return x;
+                    };
+
+                function formatAbbr(x) {
+                    var v = Math.abs(x);
+                    return (v >= .9995e7 ? formatCrore : v >= .9995e5 ? formatLakh : v >= .999e3 ? formatThousand : formatLowerDenom)(x);
+                }
+
+
+
             function drawchart(data) {
                 nv.addGraph(function() {
                     var chartdata;
@@ -70,6 +91,21 @@ ckan.module('groupbarchart-view', function($, _) {
                         .groupSpacing(0.2); //Distance between each group of bars.
 
                     chart.yAxis.ticks(10)
+                    .tickFormat(function(d) {
+                                return formatAbbr(d)
+                            })
+                    .axisLabel(data.name)
+                    .axisLabelDistance(10)
+                    .ticks(10);
+
+                    chart.y(function(d) {
+                            return parseFloat(d.value)
+                        })
+
+                        chart.tooltip.valueFormatter(function(d) {
+                                return d3.format(",.f")(d) ;
+                            })
+                           
 
                     if (maxValue < 0) {
                         maxValue = 0;
@@ -77,18 +113,15 @@ ckan.module('groupbarchart-view', function($, _) {
                     if (minValue > 0) {
                         minValue = 0;
                     }
-                    chart.yDomain([minValue, maxValue]);
+                    chart.yAxis.scale().domain([minValue, maxValue]);
 
                     chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 70 })
-                    chart.yAxis
-                        .tickFormat(d3.format(',.1f'));
+             
 
                     chart.noData("The record has no values in the budget document.");
-                    chart.xAxis.axisLabel("Year");
-                    chart.yAxis.axisLabel(data.name);
-                    chart.yAxis.axisLabelDistance(30)
-                    chart.yAxis.ticks(10)
-                    chart.xAxis.axisLabelDistance(20)
+                    
+                    chart.xAxis.axisLabel("Year")
+                    .axisLabelDistance(20);
 
                     chartdata = d3.select('#chart svg')
                         .datum(data.series)
@@ -103,11 +136,10 @@ ckan.module('groupbarchart-view', function($, _) {
 
             function add_notes() {
                 try {
-
                     var extra_fields = package_details.extras
                     var unit, note;
                     for (var i in extra_fields) {
-                        console.log(extra_fields[i]);
+                 
                         if (extra_fields[i].key == "Unit") {
                             unit = extra_fields[i].value;
                         }
@@ -135,10 +167,8 @@ ckan.module('groupbarchart-view', function($, _) {
                                 return "Note :";
                             })
                     }
-
                 }
              catch (err) {}
-
         }
 
             d3.json(resource_url, function(data) {
