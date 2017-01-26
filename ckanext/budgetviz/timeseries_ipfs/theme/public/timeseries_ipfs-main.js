@@ -5,9 +5,9 @@ ckan.module('timeseries_ipfs-main', function($, _) {
         initialize: function() {
             //d3.csv sends an HTTP GET request using resource_url provided from the template.
             d3.csv(resource_url, function(error, data) {
-                console.log(data[0])
+
                 var mungeData = function(data) {
-                    var parseDate = d3.time.format("%Y").parse;
+
                     var tempDataObject = [];
                     for (var i = 0; i < data.length; i++) {
                         var key = Object.keys(data[i])
@@ -18,7 +18,9 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                         var values_arr = []
                         for (var j = 0; j < key.length; j++) {
                             var temp = new Object();
-                            temp.x = parseDate(key[j].substring(0, 4));
+
+                            temp.x = parseInt(key[j].substring(0, 4));
+
                             temp.y = parseFloat(data[i][key[j]])
                             values_arr.push(temp);
                         }
@@ -38,14 +40,14 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                     return Array.from(types);
                 };
 
-                var listYears = function(tempDataObject){
-                    var parseDate = d3.time.format("%Y").parse;
+                var listYears = function(tempDataObject) {
+          
                     var key = Object.keys(tempDataObject)
-                        key.shift();
-                        for (var j = 0; j < key.length; j++) {
-                            key[j] = (key[j].substring(0, 4));
-                        }
-                        return key;
+                    key.shift();
+                    for (var j = 0; j < key.length; j++) {
+                        key[j] = (key[j].substring(0, 4));
+                    }
+                    return key;
 
                 }
 
@@ -66,12 +68,33 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                     });
                 }
 
+                var formatNumber = d3.format(".1f"),
+                    formatCrore = function(x) {
+                        return formatNumber(x / 1e7) + "Cr";
+                    },
+                    formatLakh = function(x) {
+                        return formatNumber(x / 1e5) + "L";
+                    },
+                    formatThousand = function(x) {
+                        return formatNumber(x / 1e3) + "k";
+                    },
+                    formatLowerDenom = function(x) {
+                        return x;
+                    };
+
+                function formatAbbr(x) {
+                    var v = Math.abs(x);
+                    return (v >= .9995e7 ? formatCrore : v >= .9995e5 ? formatLakh : v >= .999e3 ? formatThousand : formatLowerDenom)(x);
+                }
+
+
+
                 var drawchart = function(data, selection, year_list) {
                     nv.addGraph(function() {
-                        console.log(data);
-                        var formatdate = d3.time.format("%Y").parse;
+
+
                         var chart = nv.models.lineWithFocusChart()
-                            .color(["#002A4A", "#FF9311", "#D64700", "#17607D"]);
+                            .color(["#002A4A", "#FF9800", "#d64700", "#40627C", "#B1E001", "#B1E001"]);
                         chart.margin({ "left": 85, "right": 25, "top": 10, "bottom": 10 })
                         chart.showLegend(true);
 
@@ -82,23 +105,47 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                                 return d.y;
                             })
 
-                        chart.xAxis.tickFormat(function(d) {
-                            return d3.time.format('%Y')(new Date(d));
-                        }).axisLabel("Year");
+                        chart.xAxis.axisLabel("Year");
 
                         chart.x2Axis.height("200px")
+
+                        chart.xAxis
                             .tickFormat(function(d) {
-                                return d3.time.format('%Y')(new Date(d));
+                                var c = parseInt(d) + 1;
+                                return String(d) + " - " + String(c)
+                            }).axisLabel("Year")
+                            .axisLabelDistance(20);
+                        chart.x2Axis.height("200px")
+                            .tickFormat(function(d) {
+                                var c = parseInt(d) + 1;
+                                return String(d) + " - " + String(c)
                             });
 
-                        chart.yAxis.axisLabel(selection);
+
+                        chart.yAxis.axisLabel(selection)
+                            .axisLabelDistance(20)
+                            .tickFormat(function(d) {
+                                return formatAbbr(d)
+                            });
+
+                        chart.y(function(d) {
+                            return parseFloat(d.y)
+                        })
+
+                        chart.tooltip.valueFormatter(function(d) {
+                                return d3.format(",.f")(d);
+                            })
+                            .headerFormatter(function(d) {
+                                var c = parseInt(d) + 1;
+                                return String(d) + " - " + String(c)
+                            })
+                            //` chart.brushExtent([year_list[parseInt(year_list.length/10)], year_list[year_list.length - 1]]);
+
                         chart.focusHeight(150);
                         chart.focusMargin({ "top": 50 });
                         chart.pointSize(10);
-                        console.log(year_list)
-                        chart.brushExtent([formatdate(year_list[parseInt(year_list.length/10)]), formatdate(year_list[year_list.length - 1])]);
-                        chart.useInteractiveGuideline(true);
-                        chart.yAxis.axisLabelDistance(20)
+
+                        //chart.interactive(true)
 
                         var chartdata = d3.select('#chart svg')
                             .datum(data)

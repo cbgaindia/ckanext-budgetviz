@@ -19,7 +19,7 @@ ckan.module('groupbarchart-view', function($, _) {
                             continue;
                         } else {
                             var temp = new Object();
-                            temp.x = parseDate(key[j].substring(0, 4));
+                            temp.x = parseInt(key[j].substring(0, 4));
                             temp.y = parseFloat(data[i][key[j]])
                             values_arr.push(temp);
                         }
@@ -44,33 +44,51 @@ ckan.module('groupbarchart-view', function($, _) {
                 nv.addGraph(function() {
                     var chart = nv.models.lineWithFocusChart();
 
-                    chart.showLegend(true)
                     var xScale = d3.time.scale();
                     var mini, max;
                     var minmax;
                     chart.xScale;
 
-                    chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 50 })
-
+                    chart.x(function(d) {
+          
+                            return d.x
+                            })
+                    .y(function(d) {
+                            return parseFloat(d.y)
+                        })
+                    .margin({ "left": 90, "right": 40, "top": 0, "bottom": 50 })
+                    .focusHeight(120)
+                    .focusMargin({ "top": 30 })
+                    .pointSize(10)
+                    .showLegend(true)
+                    .legendPosition("top")
+                    .focusMargin({ "top": 20 });
+                    
                     chart.xAxis
                         .tickFormat(function(d) {
-                            return d3.time.format('%Y')(new Date(d))
-                        }).axisLabel("Year");
+                            var c = parseInt(d) + 1;
+                            return String(d) + " - " + String(c)
+                        }).axisLabel("Year")
+                        .axisLabelDistance(20);
                     chart.x2Axis.height("200px")
                         .tickFormat(function(d) {
-                            return d3.time.format('%Y')(new Date(d))
+                            var c = parseInt(d) + 1;
+                            return String(d) + " - " + String(c)
                         });
                     chart.legend.margin({ top: 10, right: 0, left: -20, bottom: 40 })
+                    
                     chart.yAxis.axisLabel(resource.name + "(Rs. Crore)")
-                    chart.focusHeight(120);
-                    chart.focusMargin({ "top": 30 });
-                    chart.pointSize(10)
-                    chart.yAxis.axisLabelDistance(20)
-                    chart.legendPosition("top");
-                    chart.legend.align("center")
-                        //chart.legend.padding(30)
-                    chart.xAxis.axisLabelDistance(20)
-                    chart.focusMargin({ "top": 20 });
+                    .axisLabelDistance(20)
+                    
+                    chart.legend.align("center")                    
+
+                    chart.tooltip.valueFormatter(function(d) {
+                                return d3.format(",.f")(d) ;
+                            })
+                            .headerFormatter(function(d) {
+                                var c = parseInt(d) + 1;
+                                return String(d) + " - " + String(c)
+                            })
 
                     var chartdata = d3.select('#chart svg')
                         .datum(data)
