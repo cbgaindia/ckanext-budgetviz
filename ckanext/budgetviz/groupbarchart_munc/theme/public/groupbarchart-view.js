@@ -13,7 +13,21 @@ ckan.module('groupbarchart-view', function($, _) {
                     .append("ul")
                     .attr("class", "nav nav-tabs nav-stacked")
                     .selectAll("li")
-                    .data(data)
+                    .data(data.filter(function(d){
+                            var checkNull = 1;
+                            for(var i=0;i<d.series.length;i++)
+                            {
+                                if(d.series[i].values.length == 0)
+                                {
+                                    checkNull=0
+                                }  
+                            }
+                            if(checkNull==1)
+                            {
+                                return d;    
+                            }
+                        }))
+                    
                     .enter().append("li")
                     .attr("class", function(d, i) {
                         if (i == 0) {
@@ -21,10 +35,9 @@ ckan.module('groupbarchart-view', function($, _) {
                         }
                     })
                     .classed("elem", true)
-
-                .on("click", function(d) {
-                    drawchart(d);
-                })
+                    .on("click", function(d) {
+                        drawchart(d);
+                    })
 
                 select.append("a")
                     .attr({
@@ -35,11 +48,11 @@ ckan.module('groupbarchart-view', function($, _) {
                         return d.name
                     })
 
-                $(".nav a").on("click", function() {
-                    $(".nav").find(".active").removeClass("active");
-                    $(this).parent().addClass("active");
-                });
-            }
+                    $(".nav a").on("click", function() {
+                        $(".nav").find(".active").removeClass("active");
+                        $(this).parent().addClass("active");
+                    });
+                }
 
             var formatNumber = d3.format(".1f"),
                     formatCrore = function(x) {
