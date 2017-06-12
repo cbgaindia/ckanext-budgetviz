@@ -3,7 +3,6 @@
 ckan.module('groupbarchart-view', function($, _) {
     return {
         initialize: function() {
-
             var addMiscElements = function() {
                 d3.select("#viz-header").text(resource.name)
             }
@@ -13,22 +12,9 @@ ckan.module('groupbarchart-view', function($, _) {
                     .append("ul")
                     .attr("class", "nav nav-tabs nav-stacked")
                     .selectAll("li")
-                    .data(data.filter(function(d){
-                            var checkNull = 1;
-                            for(var i=0;i<d.series.length;i++)
-                            {
-                                if(d.series[i].values.length == 0)
-                                {
-                                    checkNull=0
-                                }  
-                            }
-                            if(checkNull==1)
-                            {
-                                return d;    
-                            }
-                        }))
-                    
-                    .enter().append("li")
+                    .data(data)
+                    .enter()
+                    .append("li")
                     .attr("class", function(d, i) {
                         if (i == 0) {
                             return "active";
@@ -48,30 +34,30 @@ ckan.module('groupbarchart-view', function($, _) {
                         return d.name
                     })
 
-                    $(".nav a").on("click", function() {
-                        $(".nav").find(".active").removeClass("active");
-                        $(this).parent().addClass("active");
-                    });
-                }
+                $(".nav a").on("click", function() {
+                    $(".nav").find(".active").removeClass("active");
+                    $(this).parent().addClass("active");
+                });
+            }
 
             var formatNumber = d3.format(".1f"),
-                    formatCrore = function(x) {
-                        return formatNumber(x / 1e7) + "Cr";
-                    },
-                    formatLakh = function(x) {
-                        return formatNumber(x / 1e5) + "L";
-                    },
-                    formatThousand = function(x) {
-                        return formatNumber(x / 1e3) + "k";
-                    },
-                    formatLowerDenom = function(x) {
-                        return x;
-                    };
+                formatCrore = function(x) {
+                    return formatNumber(x / 1e7) + "Cr";
+                },
+                formatLakh = function(x) {
+                    return formatNumber(x / 1e5) + "L";
+                },
+                formatThousand = function(x) {
+                    return formatNumber(x / 1e3) + "k";
+                },
+                formatLowerDenom = function(x) {
+                    return x;
+                };
 
-                function formatAbbr(x) {
-                    var v = Math.abs(x);
-                    return (v >= .9995e7 ? formatCrore : v >= .9995e5 ? formatLakh : v >= .999e3 ? formatThousand : formatLowerDenom)(x);
-                }
+            function formatAbbr(x) {
+                var v = Math.abs(x);
+                return (v >= .9995e7 ? formatCrore : v >= .9995e5 ? formatLakh : v >= .999e3 ? formatThousand : formatLowerDenom)(x);
+            }
 
 
 
@@ -104,21 +90,21 @@ ckan.module('groupbarchart-view', function($, _) {
                         .groupSpacing(0.2); //Distance between each group of bars.
 
                     chart.yAxis.ticks(10)
-                    .tickFormat(function(d) {
-                                return formatAbbr(d)
-                            })
-                    .axisLabel(data.name)
-                    .axisLabelDistance(10)
-                    .ticks(10);
+                        .tickFormat(function(d) {
+                            return formatAbbr(d)
+                        })
+                        .axisLabel(data.name)
+                        .axisLabelDistance(10)
+                        .ticks(10);
 
                     chart.y(function(d) {
-                            return parseFloat(d.value)
-                        })
+                        return parseFloat(d.value)
+                    })
 
-                        chart.tooltip.valueFormatter(function(d) {
-                                return d3.format(",.f")(d) ;
-                            })
-                           
+                    chart.tooltip.valueFormatter(function(d) {
+                        return d3.format(",.f")(d);
+                    })
+
 
                     if (maxValue < 0) {
                         maxValue = 0;
@@ -129,12 +115,12 @@ ckan.module('groupbarchart-view', function($, _) {
                     chart.yAxis.scale().domain([minValue, maxValue]);
 
                     chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 70 })
-             
+
 
                     chart.noData("The record has no values in the budget document.");
-                    
+
                     chart.xAxis.axisLabel("Year")
-                    .axisLabelDistance(20);
+                        .axisLabelDistance(20);
 
                     chartdata = d3.select('#chart svg')
                         .datum(data.series)
@@ -152,7 +138,7 @@ ckan.module('groupbarchart-view', function($, _) {
                     var extra_fields = package_details.extras
                     var unit, note;
                     for (var i in extra_fields) {
-                 
+
                         if (extra_fields[i].key == "Unit") {
                             unit = extra_fields[i].value;
                         }
@@ -180,16 +166,28 @@ ckan.module('groupbarchart-view', function($, _) {
                                 return "Note :";
                             })
                     }
-                }
-             catch (err) {}
-        }
+                } catch (err) {}
+            }
 
             d3.json(resource_url, function(data) {
-            addMiscElements();
-            add_notes()
-            populateSelection(data);
-            drawchart(data[0])
-        });
-    }()
-};
+                addMiscElements();
+                add_notes()
+                data = data.filter(function(d) {
+
+                    var checkNull = 1;
+                    for (var i = 0; i < d.series.length; i++) {
+                        if (d.series[i].values.length == 0) {
+                            checkNull = 0
+                        }
+                    }
+                    if (checkNull == 1) {
+                        return d;
+                    }
+                })
+
+                populateSelection(data)
+                drawchart(data[0])
+            });
+        }()
+    };
 });
