@@ -105,6 +105,7 @@ ckan.module('groupbarchart-view', function($, _) {
                         return d3.format(",.f")(d);
                     })
 
+                    chart.width(700)
 
                     if (maxValue < 0) {
                         maxValue = 0;
@@ -114,7 +115,7 @@ ckan.module('groupbarchart-view', function($, _) {
                     }
                     chart.yAxis.scale().domain([minValue, maxValue]);
 
-                    chart.margin({ "left": 90, "right": 20, "top": 0, "bottom": 70 })
+                    chart.margin({ "left": 120, "right": 20, "top": 0, "bottom": 70 })
 
 
                     chart.noData("The record has no values in the budget document.");
