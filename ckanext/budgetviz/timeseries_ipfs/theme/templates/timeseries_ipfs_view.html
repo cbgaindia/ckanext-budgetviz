@@ -1,7 +1,7 @@
 
 {% block page %}
-
-  <div class="row-fluid">
+<div class="visualization-container visible-desktop"> 
+  <div class=" header-container">
     <div class="span7">
       <div class="viz-header">{{ resource['name'] }}</div>
     </div>
@@ -23,7 +23,11 @@
       </span>
     </div>
   </div>
-  
+</div>
+<div class="visible-tablet visible-phone na-text">
+The visualization are not available on mobile and tablet devices. <br>
+Please use Desktop/Laptop device to view the them. 
+</div>
 {% endblock %}
 
 {% block scripts %}
