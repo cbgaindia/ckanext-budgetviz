@@ -103,6 +103,7 @@ path.domain {
 */
 .row-fluid.notes {
     font-size: 80%;
+    padding: 0px 30px 20px;
 }
 
 @media (max-width: 480px){
@@ -126,4 +127,21 @@ path.domain {
 
 .viscontainer{
     overflow: hidden;
+}
+
+.na-text {
+    padding: 20px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.row-fluid.header-container {
+    padding-left:15px;
+}
+.visualization-container{
+    padding: 10px 20px;
+}
+
+.option-select button.btn.visbtn {
+    font-size: 12px;
 }
