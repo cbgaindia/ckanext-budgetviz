@@ -20,8 +20,27 @@ label {
 
 .option-select {
     float: right;
-   
 }
 
+.header-container {
+    width: 100%;
+    padding-bottom: 20px;
+    margin-top: 10px;
+}
 
+.nv-point {
+    stroke-opacity: 1!important;
+    stroke-width: 5px!important;
+    fill-opacity: 0!important;
+}
 
+.nv-point.hover {
+    stroke-width: 13px!important;
+    fill-opacity: .95 !important;
+    stroke-opacity: .95 !important;
+    z-index: 1000;
+}
+
+.viz-header {
+    padding: 0px;
+}
