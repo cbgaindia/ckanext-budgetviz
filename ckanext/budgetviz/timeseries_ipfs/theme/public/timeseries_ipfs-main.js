@@ -102,7 +102,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             })
                             .y(function(d) {
                                 return d.y;
-                            })
+                            });
 
                         chart.xAxis
                             .tickFormat(function(d) {
@@ -126,7 +126,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
 
                         chart.y(function(d) {
                             return parseFloat(d.y)
-                        })
+                        });
 
                         chart.tooltip.valueFormatter(function(d) {
                                 return d3.format(",.f")(d);
@@ -134,14 +134,14 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             .headerFormatter(function(d) {
                                 var c = parseInt(d) + 1;
                                 return String(d) + " - " + String(c)
-                            })
+                            });
                             //` chart.brushExtent([year_list[parseInt(year_list.length/10)], year_list[year_list.length - 1]]);
 
                         chart.focusHeight(150)
                         .focusMargin({ "top": 50 })
                         .pointSize(10)
                         .padData(true)
-                        .clipEdge(false)
+                        .clipEdge(false);
 
                         var chartdata = d3.select('#chart svg')
                             .datum(data)
