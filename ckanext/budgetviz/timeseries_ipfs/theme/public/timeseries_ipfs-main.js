@@ -140,7 +140,6 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                         chart.focusHeight(150)
                         .focusMargin({ "top": 50 })
                         .pointSize(10)
-                        .padData(true)
                         .clipEdge(false);
 
                         var chartdata = d3.select('#chart svg')
