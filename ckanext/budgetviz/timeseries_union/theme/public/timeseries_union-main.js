@@ -107,12 +107,14 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                                 return parseInt((d.label).substring(0, 4));
                             });
 
-                        chart.focusHeight(110)
-                            .margin({ "left": 90, "right": 50, "top": 0, "bottom": 50 })
+                        chart.focusHeight(120)
+                            .margin({ "left": 90, "right": 90, "top": 0, "bottom": 50 })
                             .noData("The record has no values in the budget document.")
-                            .focusMargin({ "top": 30 })
+                            .focusMargin({ "top": 20 })
                             .useInteractiveGuideline(false)
-                            .showXAxis(true);
+                            .showXAxis(true)
+                            .padData(false)
+                            .clipEdge(false);
 
                         chart.yAxis.axisLabelDistance(20).tickPadding(15)
                             .ticks(10)
@@ -121,7 +123,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             })
                             .axisLabel(data.name);
 
-                        chart.xAxis.axisLabelDistance(5)
+                        chart.xAxis.axisLabelDistance(0)
                             .axisLabel("Year");
 
                         chart.xAxis
@@ -130,6 +132,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                                 return String(d) + " - " + String(c)
                             }).axisLabel("Year")
                             .axisLabelDistance(20);
+
                         chart.x2Axis.height("200px")
                             .tickFormat(function(d) {
                                 var c = parseInt(d) + 1;
