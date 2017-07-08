@@ -50,19 +50,17 @@ ckan.module('groupbarchart-view', function($, _) {
                     chart.xScale;
 
                     chart.x(function(d) {
-          
-                            return d.x
-                            })
+                            return d.x})
                     .y(function(d) {
-                            return parseFloat(d.y)
-                        })
+                            return parseFloat(d.y) })
                     .margin({ "left": 90, "right": 40, "top": 0, "bottom": 50 })
                     .focusHeight(120)
                     .focusMargin({ "top": 30 })
                     .pointSize(10)
                     .showLegend(true)
                     .legendPosition("top")
-                    .focusMargin({ "top": 20 });
+                    .focusMargin({ "top": 20 })
+                    .clipEdge(false);
                     
                     chart.xAxis
                         .tickFormat(function(d) {
@@ -75,12 +73,12 @@ ckan.module('groupbarchart-view', function($, _) {
                             var c = parseInt(d) + 1;
                             return String(d) + " - " + String(c)
                         });
+
                     chart.legend.margin({ top: 10, right: 0, left: -20, bottom: 40 })
-                    
+                    .align("center"); 
+
                     chart.yAxis.axisLabel(resource.name + "(Rs. Crore)")
-                    .axisLabelDistance(20)
-                    
-                    chart.legend.align("center")                    
+                    .axisLabelDistance(20);              
 
                     chart.tooltip.valueFormatter(function(d) {
                                 return d3.format(",.f")(d) ;

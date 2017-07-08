@@ -92,35 +92,31 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                 var drawchart = function(data, selection, year_list) {
                     nv.addGraph(function() {
 
-
                         var chart = nv.models.lineWithFocusChart()
-                            .color(["#002A4A", "#FF9800", "#d64700", "#40627C", "#B1E001", "#B1E001"]);
-                        chart.margin({ "left": 85, "right": 25, "top": 10, "bottom": 10 })
-                        chart.showLegend(true);
+                        .color(["#002A4A", "#FF9800", "#d64700", "#40627C", "#B1E001", "#B1E001"])
+                        .margin({ "left": 95, "right": 35, "top": 10, "bottom": 10 })
+                        .showLegend(true);
 
                         chart.x(function(d) {
                                 return d.x;
                             })
                             .y(function(d) {
                                 return d.y;
-                            })
-
-                        chart.xAxis.axisLabel("Year");
-
-                        chart.x2Axis.height("200px")
+                            });
 
                         chart.xAxis
                             .tickFormat(function(d) {
                                 var c = parseInt(d) + 1;
                                 return String(d) + " - " + String(c)
-                            }).axisLabel("Year")
+                            })
+                            .axisLabel("Year")
                             .axisLabelDistance(20);
+                        
                         chart.x2Axis.height("200px")
                             .tickFormat(function(d) {
                                 var c = parseInt(d) + 1;
                                 return String(d) + " - " + String(c)
                             });
-
 
                         chart.yAxis.axisLabel(selection)
                             .axisLabelDistance(20)
@@ -130,7 +126,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
 
                         chart.y(function(d) {
                             return parseFloat(d.y)
-                        })
+                        });
 
                         chart.tooltip.valueFormatter(function(d) {
                                 return d3.format(",.f")(d);
@@ -138,14 +134,13 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             .headerFormatter(function(d) {
                                 var c = parseInt(d) + 1;
                                 return String(d) + " - " + String(c)
-                            })
+                            });
                             //` chart.brushExtent([year_list[parseInt(year_list.length/10)], year_list[year_list.length - 1]]);
 
-                        chart.focusHeight(150);
-                        chart.focusMargin({ "top": 50 });
-                        chart.pointSize(10);
-
-                        //chart.interactive(true)
+                        chart.focusHeight(150)
+                        .focusMargin({ "top": 50 })
+                        .pointSize(10)
+                        .clipEdge(false);
 
                         var chartdata = d3.select('#chart svg')
                             .datum(data)

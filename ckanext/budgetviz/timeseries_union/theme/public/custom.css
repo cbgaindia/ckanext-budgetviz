@@ -4,8 +4,8 @@ svg {
     height: 500px;
 }
 
-.viz-outer-container {
-    margin-top: 20px;
+.chart-area {
+    padding: 10px 25px;
 }
 
 #item-select {

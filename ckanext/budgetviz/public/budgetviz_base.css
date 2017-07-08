@@ -66,13 +66,11 @@ path.domain {
     color: rgb(0, 0, 0);
     padding: 10px 0px;
     padding-left: 10px;
-    
+    line-height: 1.25em;
     opacity: 0.8;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     font-size: 20px;
     opacity: 0.8;
     font-size: 130%;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .scheme-select {
@@ -105,6 +103,7 @@ path.domain {
 */
 .row-fluid.notes {
     font-size: 80%;
+    padding: 0px 30px 20px;
 }
 
 @media (max-width: 480px){
@@ -128,4 +127,34 @@ path.domain {
 
 .viscontainer{
     overflow: hidden;
+}
+
+.na-text {
+    padding: 20px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.row-fluid.header-container {
+    padding-left:15px;
+}
+.visualization-container{
+    padding: 10px 20px;
+}
+
+.option-select button.btn.visbtn {
+    font-size: 12px;
+}
+
+.nv-point {
+    stroke-opacity: 1!important;
+    stroke-width: 5px!important;
+    fill-opacity: 0!important;
+}
+
+.nv-point.hover {
+    stroke-width: 13px!important;
+    fill-opacity: .95 !important;
+    stroke-opacity: .95 !important;
+    z-index: 1000000;
 }
