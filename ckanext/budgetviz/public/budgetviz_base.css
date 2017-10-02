@@ -158,3 +158,9 @@ path.domain {
     stroke-opacity: .95 !important;
     z-index: 1000000;
 }
+
+g.nv-y g.zero line {
+    stroke: rgba(0, 0, 0, 0.50);
+    stroke-opacity: 0.9 !important;
+    stroke-width: 1;
+}
