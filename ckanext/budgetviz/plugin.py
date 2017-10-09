@@ -5,6 +5,51 @@ import ckan.lib.datapreview as datapreview
 
 log = logging.getLogger(__name__)
 
+class UnionBudgetExpBudget(p.SingletonPlugin):
+
+    p.implements(p.IConfigurer, inherit=True)
+    p.implements(p.IConfigurable, inherit=True)
+    p.implements(p.IResourceView, inherit=True)
+
+    # IConfigurer
+    def update_config(self, config):
+        p.toolkit.add_public_directory(config, 'unionbudget_exp/theme/public')
+        p.toolkit.add_template_directory(config ,'unionbudget_exp/theme/templates')
+        p.toolkit.add_resource('public', 'base_css')
+        p.toolkit.add_resource('unionbudget_exp/theme/public', 'unionbudget_exp')
+    proxy_is_enabled = False
+
+    def info(self):
+        return {
+                'name' : 'unionbudget_exp',
+                'title' : 'Union Budget Expenditue',
+                'icon': 'bar-chart',
+                'iframed': False
+                }
+
+    def configure(self, config):
+        enabled = config.get('ckan.resource_proxy_enabled', False)
+        self.proxy_is_enabled = enabled
+
+    def can_view(self, data_dict):
+        resource = data_dict['package']
+        proxy_enabled = p.plugin_loaded('resource_proxy')
+        same_domain = datapreview.on_same_domain(data_dict)
+        return same_domain or proxy_enabled
+      
+    def view_template(self, context, data_dict):
+        return 'unionbudget_exp_view.html'
+
+    def setup_template_variables(self, context, data_dict):
+        resource = data_dict['resource']
+        resource_view = data_dict['resource_view']
+        package = data_dict['package']
+
+        return {'resource': resource,
+                'resource_view': resource_view,
+                'package' : package,
+               }
+
 class TimeseriesIPFSBudget(p.SingletonPlugin):
 
     p.implements(p.IConfigurer, inherit=True)
