@@ -1,0 +1,144 @@
+	.outer-container {
+	    margin: 0px auto;
+	    height: 570px
+	}
+
+	.outer-wrapper {
+	    padding: 20px;
+	}
+
+	.selection-panel {
+    width: 37%;
+    float: left;
+    margin-right: 30px;
+}
+
+	.chart-panel {
+	    width: 59%;
+	    float: left;
+	}
+
+
+	rect.nv-bar {
+	    fill-opacity: 1;
+	}
+
+	#select-list {
+	    overflow-y: auto;
+	    font-family: 'Lato', sans-serif;
+	    overflow-x: hidden;
+	    height: 515px;
+	}
+
+	#chart-area {
+	    height: 340px;
+	}
+
+	.records .no-series {
+	    /*color: rgba(64, 64, 64, 0.68);*/
+	}
+
+	.records li {
+	    padding: 1px 0px;
+	}
+
+	.groupbarchart {
+	    padding: 0px 0px 0px 25px;
+	    margin-left: 0px !important;
+	}
+
+	.records .series:hover {
+	    border-radius: 3px;
+	    background-color: rgba(64, 64, 64, 0.18);
+	    cursor: pointer;
+	}
+
+	ul {
+	    list-style-position: outside;
+	}
+
+	.panel {
+	    margin-bottom: 20px;
+	    background-color: #fff;
+	    border: 1px solid transparent;
+	    border-radius: 4px;
+	    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	}
+
+	.panel-default {
+	    border-color: #ddd;
+	}
+
+	.panel-default>.panel-heading {
+	    color: #333;
+	    background-color: #f5f5f5;
+	    border-color: #ddd;
+	}
+
+	.panel-heading {
+	    padding: 10px 15px;
+	    font-weight: 700;
+	    border-bottom: 1px solid transparent;
+	    border-top-left-radius: 3px;
+	    border-top-right-radius: 3px;
+	}
+
+	.panel-body {
+	    padding: 15px 15px 0px 15px;
+	}
+
+	.chart-hr {
+	    margin: 4px;
+	}
+
+	.table th,
+	.table td {
+	    padding: 5px;
+	}
+
+	.fig-num {
+	    float: right;
+	}
+
+	.fig-per {
+	    margin-right: 10px;
+	}
+
+	table#per-table {
+	    font-size: 12px;
+	}
+
+	.table th,
+	.table td {
+	    padding: 5px 10px;
+	    text-align: center;
+	}
+
+	tr>td:first-child {
+	    padding: 3px 0px 3px 6px;
+	    text-align: left;
+	}
+
+	li.list.active.series {
+	    background-color: rgba(64, 64, 64, 0.33);
+	}
+
+	/*li div {
+	    overflow: hidden;
+	}*/
+
+	i.fa {
+	    font-size: 11px;
+	    margin-right: 9px;
+	    float: left;
+	    margin-top: 5px;
+	}
+
+	button#download_vis {
+	    float: right;
+	    /* text-align: -webkit-left; */
+	    /* margin-bottom: 16px; */
+	    padding: 2px 10px;
+	    margin-top: -3px;
+	}
