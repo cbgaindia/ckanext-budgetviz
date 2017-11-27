@@ -1,144 +1,247 @@
-	.outer-container {
-	    margin: 0px auto;
-	    height: 570px
-	}
-
-	.outer-wrapper {
-	    padding: 20px;
-	}
-
-	.selection-panel {
-    width: 37%;
-    float: left;
-    margin-right: 30px;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Roboto:100,300');
+.outer-container {
+    margin: 0px auto;
+    height: 570px
 }
 
-	.chart-panel {
-	    width: 59%;
-	    float: left;
-	}
+.outer-wrapper {
+    padding: 20px;
+}
+
+.selection-panel {
+    width: 34%;
+    float: left;
+}
+
+.chart-panel {
+    width: 59%;
+    float: left;
+    padding: 0px 20px 0px 0px;
+}
 
 
-	rect.nv-bar {
-	    fill-opacity: 1;
-	}
+rect.nv-bar {
+    fill-opacity: 1;
+}
 
-	#select-list {
-	    overflow-y: auto;
-	    font-family: 'Lato', sans-serif;
-	    overflow-x: hidden;
-	    height: 515px;
-	}
+#select-list {
+    overflow-y: auto;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+    max-height: 515px;
+}
 
-	#chart-area {
-	    height: 340px;
-	}
+#chart-area {
+    height: 340px;
+}
 
-	.records .no-series {
-	    /*color: rgba(64, 64, 64, 0.68);*/
-	}
+.records .no-series {
+    /*color: rgba(64, 64, 64, 0.68);*/
+}
 
-	.records li {
-	    padding: 1px 0px;
-	}
+.records li {
+    font-size: 14px;
+    padding-top: 0px;
+    
+}
 
-	.groupbarchart {
-	    padding: 0px 0px 0px 25px;
-	    margin-left: 0px !important;
-	}
 
-	.records .series:hover {
-	    border-radius: 3px;
-	    background-color: rgba(64, 64, 64, 0.18);
-	    cursor: pointer;
-	}
+.groupbarchart {
+    padding: 0px 0px 0px 25px;
+    margin-left: 0px !important;
+}
 
-	ul {
-	    list-style-position: outside;
-	}
+.records .series:hover {
+    border-radius: 3px;
+    background-color: rgba(64, 64, 64, 0.18);
+    cursor: pointer;
+}
 
-	.panel {
-	    margin-bottom: 20px;
-	    background-color: #fff;
-	    border: 1px solid transparent;
-	    border-radius: 4px;
-	    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-	    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-	}
+ul {
+    list-style-position: outside;
+}
 
-	.panel-default {
-	    border-color: #ddd;
-	}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
 
-	.panel-default>.panel-heading {
-	    color: #333;
-	    background-color: #f5f5f5;
-	    border-color: #ddd;
-	}
+.panel-default {
+    border-color: #ddd;
+}
 
-	.panel-heading {
-	    padding: 10px 15px;
-	    font-weight: 700;
-	    border-bottom: 1px solid transparent;
-	    border-top-left-radius: 3px;
-	    border-top-right-radius: 3px;
-	}
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
 
-	.panel-body {
-	    padding: 15px 15px 0px 15px;
-	}
+.panel-heading {
+    padding: 10px 15px;
+    font-weight: 700;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
 
-	.chart-hr {
-	    margin: 4px;
-	}
+.panel-body {
+    padding: 25px;
+}
 
-	.table th,
-	.table td {
-	    padding: 5px;
-	}
+.chart-hr {
+    margin: 4px;
+}
 
-	.fig-num {
-	    float: right;
-	}
+.table th,
+.table td {
+    padding: 5px;
+}
 
-	.fig-per {
-	    margin-right: 10px;
-	}
+.fig-num {
+    float: right;
+}
 
-	table#per-table {
-	    font-size: 12px;
-	}
+.fig-per {
+    margin-right: 10px;
+}
 
-	.table th,
-	.table td {
-	    padding: 5px 10px;
-	    text-align: center;
-	}
+table#per-table {
+    font-size: 12px;
+}
 
-	tr>td:first-child {
-	    padding: 3px 0px 3px 6px;
-	    text-align: left;
-	}
+.table th,
+.table td {
+    padding: 5px 10px;
+    text-align: center;
+}
 
-	li.list.active.series {
-	    background-color: rgba(64, 64, 64, 0.33);
-	}
+tr>td:first-child {
+    vertical-align: middle;
+    padding: 3px 0px 3px 6px;
+    text-align: left;
+}
 
-	/*li div {
+li.list.active.series {
+    background-color: rgba(64, 64, 64, 0.33);
+    /*border-left: 5px solid;*/
+}
+
+
+/*li div {
 	    overflow: hidden;
 	}*/
 
-	i.fa {
-	    font-size: 11px;
-	    margin-right: 9px;
-	    float: left;
-	    margin-top: 5px;
-	}
+i.icon-angle-right {
+    font-size: 11px;
+    margin-right: 9px;
+    float: left;
+    margin-top: 5px;
+}
 
-	button#download_vis {
-	    float: right;
-	    /* text-align: -webkit-left; */
-	    /* margin-bottom: 16px; */
-	    padding: 2px 10px;
-	    margin-top: -3px;
-	}
+button#download_vis {
+    float: right;
+    /* text-align: -webkit-left; */
+    /* margin-bottom: 16px; */
+    padding: 2px 10px;
+    margin-top: -3px;
+}
+
+.nvd3 text,
+.nvd3 .tick text,
+.nvd3 .nv-axis .nv-axisMaxMin text {
+    font: normal 300 11px "Open Sans";
+}
+
+text.nv-axislabel {
+    font: normal 300 14px "Open Sans";
+}
+
+.record-index {
+    float: left;
+}
+.record-name {
+    overflow: hidden;
+}
+
+.records i {
+    float: left;
+    margin-right: 8px;
+    margin-top: 5px;
+    font-size: 11px;
+}
+
+div#header-row {
+    padding: 10px 0px 20px 10px;
+}
+div#viz-header {
+    line-height: 20px;
+}
+
+
+.nv-1 {
+    margin-top: 20px;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.nv-2.summary{
+    padding-left: 30px;
+}
+.nv-2.upper_hierarchy{
+    margin-top:10px;
+    font-weight: 700;
+    margin-bottom:5px;
+    font-size: 15px;
+
+}
+.nv-3{
+    font-weight: 700;
+    padding-left: 10px
+}
+.nv-4{
+    padding-left: 25px
+}
+.nv-5{
+    padding-left: 50px
+}
+
+li.summary:first-child {
+    margin-top: 0px;
+}
+#select-list li:last-child {
+    font-size: 16px;
+    font-weight: 900;
+    margin-top: 8px;
+}
+
+@media (min-width:980px) and (max-width: 1210px) 
+{
+    .chart-panel{
+        padding-right: 10px;
+    }
+    #select-list{
+        max-height: 610px
+    }
+    .outer-wrapper{
+        padding: 20px 10px 0px 10px ;
+    }
+    div#table-body {
+    padding: 25px;
+    }
+    button#download_vis {
+    float: right;
+    margin-right: 30px;
+    font: normal 600 14px "Open Sans";
+    }
+    #per-table td span {
+    clear: both;
+    display: block;
+    text-align: right;
+}
+}
+
+

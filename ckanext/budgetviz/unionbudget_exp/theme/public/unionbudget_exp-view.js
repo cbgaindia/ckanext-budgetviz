@@ -4,39 +4,6 @@ ckan.module('unionbudget_exp-view', function($, _) {
     return {
         initialize: function() {
             function populate_records(data) {
-
-                var font_weigt_key = {
-                    "1": 400,
-                    "2": 400,
-                    "3": 400,
-                    "4": 400,
-                    "5": 400
-                }
-                var margin_top_key = {
-                    "1": "25",
-                    "2": "10",
-                    "3": "0",
-                    "4": "0",
-                    "5": "0",
-                    "6": "0"
-                }
-
-                var font_size_key = {
-                    "1": "14px",
-                    "2": "14px",
-                    "3": "14px",
-                    "4": "14px",
-                    "5": "14px"
-                }
-                var padding_key = {
-                    "1": "0px",
-                    "2": "10px",
-                    "3": "25px",
-                    "4": "50px",
-                    "5": "78px",
-                    "6": "136px"
-                }
-
                 var flag = 0
 
                 var select = d3.select("#select-list")
@@ -49,19 +16,27 @@ ckan.module('unionbudget_exp-view', function($, _) {
                     .html(function(d) {
                         if (d.hasOwnProperty('series')) {
                             if (d.hasOwnProperty('key_index')) {
-                                return "<i class='fa fa-square-o' aria-hidden='true'></i> " + "<div class='record-name'>" + d.key_index + " . " + d.key + "</div>"
+                                return "<i class='icon-check-empty' aria-hidden='true'></i> " + /*"<div class='record-index'>" + d.key_index + " . " + " </div>" + */ "<div class='record-name'>  " + " " + d.key + "</div>"
                             } else {
-                                return "<i class='fa fa-square-o' aria-hidden='true'></i> " + "<div class='record-name'>" + d.key + "</div>"
+                                return "<i class='icon-check-empty' aria-hidden='true'></i> " + "<div class='record-name'>" + d.key + "</div>"
                             }
                         } else {
+
+                            if (d["key_lvl"] == 2) {
+                                return "<i class='icon-list-ul' aria-hidden='true'></i> " + "<div class='record-name'>  " + d.key + "</div>"
+                            }
+
+                            if (d['key_lvl'] == 1) {
+                                return "<div class='record-name'>  " + d.key + "</div>"
+                            }
+
                             if (d.hasOwnProperty('key_index')) {
-                                return d.key_index + " . " + d.key
+                                return "<i class='icon-sign-blank' aria-hidden='true'></i> " /*+"<div class='record-index'>" + d.key_index  + " . " + "</div> " */ + "<div class='record-name'>  " + d.key + " </div>"
                             } else {
-                                return d.key
+                                return "<i class='icon-sign-blank' aria-hidden='true'></i> " + "<div class='record-name'>  " + d.key + "</div>"
                             }
                         }
                     })
-                    .attr("class", "list")
                     .attr("class", function(d, i) {
                         var class_str = "list "
                         if (d.hasOwnProperty("series") && flag == 0) {
@@ -77,43 +52,9 @@ ckan.module('unionbudget_exp-view', function($, _) {
                         } else {
                             class_str = class_str.concat("no-series ")
                         }
-                        return class_str
-                    })
 
-                    .style("font-weight", function(d) {
-                        return font_weigt_key[d.key_lvl]
+                        return class_str.concat(" nv-" + d["key_lvl"]).concat(" " + d["key_attr"])
                     })
-                    /*.style("padding-left", function(d) {
-                        return padding_key[d.key_lvl]
-                    })*/
-                    .style("font-size", function(d) {
-                        return font_size_key[d.key_lvl]
-                    })
-                    /*.style("margin-top", function(d) {
-                        if (d["key"].substr(0, 5) == "Total") {
-                            return margin_top_key[d.key_lvl] + "px"
-                        }
-                    })
-                    .style("margin-bottom", function(d) {
-                        if (d["key"].substr(0, 5) == "Total") {
-
-                            console.log(d["key"])
-                            return " 20px"
-                        }
-                    })*/
-                    .style("border-top", function(d, i){
-                        if(i != 0 && d.key_lvl == 1){
-                            return "2px solid #ddd"
-                        }
-
-                    })
-                    /*.style("margin-bottom", function(d){
-                        if(d["key_attr"] != "aggregate"){
-                            return "20px"
-                        }
-                    })*/
-
-
                     .on("click", function(d) {
                         if (d.hasOwnProperty('series')) {
                             generate_table(d)
@@ -124,27 +65,19 @@ ckan.module('unionbudget_exp-view', function($, _) {
                         }
                     })
 
-                $(".records").find(".active").children("i").addClass("fa-check-square");
+                $(".records").find(".active").children("i").removeClass("icon-check-empty");
+                $(".records").find(".active").children("i").addClass("icon-check-sign");
 
                 $(".records li.series").on("click", function(d) {
-                    $(".records").find(".active").children("i").removeClass("fa-check-square");
-                    $(".records").find(".active").children("i").addClass("fa-square-o");
+                    $(".records").find(".active").children("i").removeClass("icon-check-sign");
+                    $(".records").find(".active").children("i").addClass("icon-check-empty");
 
                     $(".records").find(".active").removeClass("active");
                     $(this).addClass("active");
 
-                    $(this).children("i").removeClass("fa-square-o");
-                    $(this).children("i").addClass("fa-check-square");
-
+                    $(this).children("i").removeClass("icon-check-empty");
+                    $(this).children("i").addClass("icon-check-sign");
                 });
-            }
-
-            function add_actions() {
-                document.getElementById("download_vis").addEventListener("click", downloadImage, true);
-                Mousetrap.bind('alt+p', function() {
-                    downloadImage();
-                });
-
             }
 
             function filter(node) {
@@ -156,8 +89,17 @@ ckan.module('unionbudget_exp-view', function($, _) {
             }
 
             function downloadImage() {
-                domtoimage.toBlob(document.getElementById('per-change'), { filter: filter }).then(function(blob) { window.saveAs(blob, d3.select("#viz-header").text() + ".png"); });
+                domtoimage.toBlob(document.getElementById('visualization-area'), { filter: filter }).then(function(blob) { window.saveAs(blob, d3.select("#viz-header").text() + ".png"); });
             }
+
+            function add_actions() {
+                document.getElementById("download_vis").addEventListener("click", downloadImage, true);
+                Mousetrap.bind('alt+p', function() {
+                    downloadImage();
+                });
+            }
+
+
 
             function generate_table(data) {
                 d3.select("#per-table").remove()
@@ -224,7 +166,7 @@ ckan.module('unionbudget_exp-view', function($, _) {
                                     })
                                     if (typeof previous_record != "undefined") {
                                         var percent_figure = ((current_record["value"] - previous_record["value"]) / previous_record["value"] * 100)
-                                        return "<span class='fig-per' >" + percent_figure.toFixed(2) + "% " + "</span>" + "<span class='fig-num' >" + current_record["value"].toFixed(2) + " Cr." + "</span>"
+                                        return "<span class='fig-per' >" + percent_figure.toFixed(2) + " % " + "</span>" + "<span class='fig-num' >" + current_record["value"].toFixed(2) + " Cr." + "</span>"
 
                                     } else {
                                         return "<span class='fig-num' >" + current_record["value"].toFixed(2) + " Cr." + "</span>"
@@ -274,16 +216,17 @@ ckan.module('unionbudget_exp-view', function($, _) {
                         .x(function(d) { return d.label })
                         .y(function(d) { return d.value })
                         .height(350)
-                        .width(550)
-                        .margin({ top: 5, right: 10, bottom: 50, left: 80 })
+                        .margin({ top: 5, right: 30, bottom: 50, left: 70 })
                         .reduceXTicks(false) //If 'false', every single x-axis tick label will be rendered.
                         .rotateLabels(0) //Angle to rotate x-axis labels.
                         .showControls(false) //Allow user to switch between 'Grouped' and 'Stacked' mode.
-                        .groupSpacing(0.1); //Distance between each group of bars.
+                        .groupSpacing(0.1) //Distance between each group of bars.
+                        //.staggerLabels(true)
+                        .wrapLabels(true);
 
                     chart.yAxis.axisLabel("Rs. Crore")
-                        .axisLabelDistance(10)
-                        .ticks(10)
+                        .axisLabelDistance(7)
+                        .ticks(8)
                         .tickFormat(d3.format(',.1f'));
 
                     var chartdata = d3.select("#chart-area svg")
