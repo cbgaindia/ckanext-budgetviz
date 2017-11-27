@@ -87,7 +87,7 @@ path.domain {
 }
 
 .nv-axislabel {
-    font: bold 14px "Open Sans" !important;
+    font: bold 14px "Open Sans";
 }
 .nvd3 .nv-axis .nv-axisMaxMin text {
     font-weight: bold !important;
@@ -164,3 +164,4 @@ g.nv-y g.zero line {
     stroke-opacity: 0.9 !important;
     stroke-width: 1;
 }
+
