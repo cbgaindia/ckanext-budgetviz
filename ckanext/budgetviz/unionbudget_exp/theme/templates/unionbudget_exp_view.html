@@ -1,0 +1,55 @@
+{% extends 'dataviewer/base.html' %}
+{% block page %}
+
+<div class="visualization-container visible-desktop"> 
+    <div class="outer-wrapper">
+        <div class="row-fluid">            
+            <div class="row">
+                <div class=" chart-panel" id="visualization-area">
+                    <div class="row" id="header-row">
+                        <div class="span9" id="viz-header"></div>
+                        <div class="span3"><button type="button" value="download" class="btn btn-default" id="download_vis"> <i className="fa fa-download  fa-lg" aria-hidden="false"></i> Download </button></div>
+                        
+                    </div>
+                    <div id="row">
+                        <div class="" id="chart-area">
+                            <svg></svg>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="table-body">
+                            <table class="table vis-table" id="per-table">
+                            </table>
+                        </div>
+                    </div>
+                
+                </div>
+                
+                <div class="selection-panel well" id="select-list">
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>
+
+<div class="visible-tablet visible-phone na-text">
+The visualization are not available on mobile and tablet devices. <br>
+Please use Desktop/Laptop device to view the them. 
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
+    var package_details = {{ h.literal(h.dump_json(package)) }}
+    var resource ={{ h.literal(h.dump_json(resource)) }};
+
+  </script>
+ 
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
+  
+  {% resource 'base_css/budgetviz_base.css' %}
+  {% resource 'unionbudget_exp/main' %}
+{% endblock %}

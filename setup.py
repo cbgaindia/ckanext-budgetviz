@@ -83,6 +83,7 @@ setup(
         groupbarchart_munc=ckanext.budgetviz.plugin:GroupBarChartMuncBudget
         timeseries_rbi=ckanext.budgetviz.plugin:TimeseriesRBIBudget
         timeseries_union=ckanext.budgetviz.plugin:TimeseriesUnionBudget
+        unionbudget_exp=ckanext.budgetviz.plugin:UnionBudgetExpBudget
 	[babel.extractors]
 	ckan = ckan.lib.extract:extract_ckan
     ''',
