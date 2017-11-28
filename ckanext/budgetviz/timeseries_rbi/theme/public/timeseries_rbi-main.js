@@ -40,7 +40,7 @@ ckan.module('groupbarchart-view', function($, _) {
                 d3.select("#viz-header").text(toTitleCase(resource.name));
             }
 
-            function remove_notes(data) {
+            function remove_record_notes(data) {
                 var regex = /[a-zA-Z]/i;
                 var data_length = data.length
                 for (var i = 0, j = 0; j < data_length; j++) {
@@ -55,8 +55,43 @@ ckan.module('groupbarchart-view', function($, _) {
                 return data
             }
 
+            function add_notes() {
+                try {
+                    var extra_fields = package_details.extras
+                    var unit, note;
+                    for (var i in extra_fields) {
+                        if (extra_fields[i].key.substr(0, 4).toLowerCase() == "unit" ) {
+                            unit = extra_fields[i].value;
+                        }
+                        if (extra_fields[i].key.substr(0, 4).toLowerCase() == "note") {
+                            note = extra_fields[i].value;
+                        }
+                    }
+                    if (unit) {
+                        d3.select(".notes-content")
+                            .text(function(d) {
+                                return unit;
+                            })
+                        d3.select(".notes-heading")
+                            .text(function(d) {
+                                return "Unit :";
+                            })
+                    }
+                    if (note) {
+                        d3.select(".unit-note-content")
+                            .text(function(d) {
+                                return note;
+                            })
+                        d3.select(".unit-note-heading")
+                            .text(function(d) {
+                                return "Note :";
+                            })
+                    }
+                } catch (err) {}
+            }
+
             function prepareData(data) {
-                return mungeData(remove_notes(data))
+                return mungeData(remove_record_notes(data))
             }
 
             function drawChart(data) {
@@ -71,7 +106,8 @@ ckan.module('groupbarchart-view', function($, _) {
                             return d.x
                         })
                         .y(function(d) {
-                            return parseFloat(d.y)
+                            var value = parseFloat(d.y)
+                            return parseFloat(value.toFixed(2))
                         })
                         .margin({ "left": 90, "right": 40, "top": 0, "bottom": 50 })
                         .focusHeight(120)
@@ -121,6 +157,7 @@ ckan.module('groupbarchart-view', function($, _) {
             d3.csv(resource_url, function(error, data) {
                 addMiscElements();
                 drawChart(prepareData(data));
+                add_notes()
             });
         }()
     };
