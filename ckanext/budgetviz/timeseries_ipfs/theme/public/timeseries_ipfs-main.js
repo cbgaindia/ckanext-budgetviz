@@ -3,7 +3,6 @@
 ckan.module('timeseries_ipfs-main', function($, _) {
     return {
         initialize: function() {
-            //d3.csv sends an HTTP GET request using resource_url provided from the template.
             d3.csv(resource_url, function(error, data) {
 
                 var mungeData = function(data) {
@@ -41,7 +40,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                 };
 
                 var listYears = function(tempDataObject) {
-          
+
                     var key = Object.keys(tempDataObject)
                     key.shift();
                     for (var j = 0; j < key.length; j++) {
@@ -93,9 +92,9 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                     nv.addGraph(function() {
 
                         var chart = nv.models.lineWithFocusChart()
-                        .color(["#002A4A", "#FF9800", "#d64700", "#40627C", "#B1E001", "#B1E001"])
-                        .margin({ "left": 95, "right": 35, "top": 10, "bottom": 10 })
-                        .showLegend(true);
+                            .color(["#002A4A", "#FF9800", "#d64700", "#40627C", "#B1E001", "#B1E001"])
+                            .margin({ "left": 95, "right": 35, "top": 10, "bottom": 10 })
+                            .showLegend(true);
 
                         chart.x(function(d) {
                                 return d.x;
@@ -111,7 +110,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             })
                             .axisLabel("Year")
                             .axisLabelDistance(20);
-                        
+
                         chart.x2Axis.height("200px")
                             .tickFormat(function(d) {
                                 var c = parseInt(d) + 1;
@@ -135,12 +134,12 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                                 var c = parseInt(d) + 1;
                                 return String(d) + " - " + String(c)
                             });
-                            //` chart.brushExtent([year_list[parseInt(year_list.length/10)], year_list[year_list.length - 1]]);
+                        //` chart.brushExtent([year_list[parseInt(year_list.length/10)], year_list[year_list.length - 1]]);
 
                         chart.focusHeight(150)
-                        .focusMargin({ "top": 50 })
-                        .pointSize(10)
-                        .clipEdge(false);
+                            .focusMargin({ "top": 50 })
+                            .pointSize(10)
+                            .clipEdge(false);
 
                         var chartdata = d3.select('#chart svg')
                             .datum(data)

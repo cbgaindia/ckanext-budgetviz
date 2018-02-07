@@ -2,7 +2,9 @@
 .nv-axislabel {
     font-family: 'Open Sans', sans-serif;
 }
-
+.visualization-container .row{
+    margin-left:-20px!important;
+}
 text {
     font-size: 12px;
 }
@@ -15,7 +17,7 @@ svg {
 svg {
     margin: 0 auto;
     padding: 0px;
-    height: 400px;
+    /*height: 400px;*/
     width: 100%;
     opacity: 0.95;
 }
@@ -164,3 +166,12 @@ g.nv-y g.zero line {
     stroke-width: 1;
 }
 
+.chart-area {
+    margin-bottom: 20px;
+    padding: 10px 25px;
+}
+.notes {
+    padding: 0px 50px;
+    font-weight: 300;
+    font-size: 14px;
+}

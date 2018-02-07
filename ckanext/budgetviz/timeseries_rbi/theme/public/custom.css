@@ -7,3 +7,24 @@ svg {
 .option-select {
     float: right;
 }
+
+#chart,
+svg {
+    margin-bottom: : 20px;
+}
+
+@media (max-width: 800px) {
+    #chart,
+    svg {
+        margin-bottom: : 20px;
+        min-height: 750px;
+    }
+}
+
+@media (max-width: 404px) {
+    #chart,
+    svg {
+        margin-bottom: : 20px;
+        min-height: 450px;
+    }
+}

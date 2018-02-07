@@ -115,8 +115,7 @@ ckan.module('groupbarchart-view', function($, _) {
                     }
                     chart.yAxis.scale().domain([minValue, maxValue]);
 
-                    chart.margin({ "left": 120, "right": 20, "top": 0, "bottom": 70 })
-                    .width(700)
+                    chart.margin({ "left": 100, "right": 20, "top": 20, "bottom": 70 })
                     .noData("The record has no values in the budget document.")
              
                     chart.xAxis.axisLabel("Year")

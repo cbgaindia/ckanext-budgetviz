@@ -41,17 +41,11 @@ ckan.module('groupbarchart-view', function($, _) {
             }
 
             function remove_record_notes(data) {
-                var regex = /[a-zA-Z]/i;
-                var data_length = data.length
-                for (var i = 0, j = 0; j < data_length; j++) {
-                    if (!(regex.test(data[i]["States"][0]))) {
-                        data.splice(i, 1)
-                    } else {
-                        i++;
+                data = data.filter(function(d) {
+                    if (d["States"].trim()[1] == "." || d["States"].trim()[1] == "-") {} else {
+                        return d
                     }
-                }
-                for (var i = 0; i < data.length; i++) {
-                }
+                })
                 return data
             }
 
@@ -60,7 +54,7 @@ ckan.module('groupbarchart-view', function($, _) {
                     var extra_fields = package_details.extras
                     var unit, note;
                     for (var i in extra_fields) {
-                        if (extra_fields[i].key.substr(0, 4).toLowerCase() == "unit" ) {
+                        if (extra_fields[i].key.substr(0, 4).toLowerCase() == "unit") {
                             unit = extra_fields[i].value;
                         }
                         if (extra_fields[i].key.substr(0, 4).toLowerCase() == "note") {
@@ -110,6 +104,7 @@ ckan.module('groupbarchart-view', function($, _) {
                             return parseFloat(value.toFixed(2))
                         })
                         .margin({ "left": 90, "right": 40, "top": 0, "bottom": 50 })
+
                         .focusHeight(120)
                         .focusMargin({ "top": 30 })
                         .pointSize(10)
@@ -130,9 +125,17 @@ ckan.module('groupbarchart-view', function($, _) {
                             return String(d) + " - " + String(c)
                         });
 
-                    chart.legend.margin({ top: 10, right: 0, left: -20, bottom: 40 })
-                        .align("center");
-
+                    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                    if (width > 600) {
+                        chart.legend.margin({ top: 10, right: 0, left: -20, bottom: 40 })
+                            .align("center");
+                    } else if (width > 405) {
+                        chart.legend.margin({ top: 10, right: 0, left: -35, bottom: 40 })
+                            .align("center");
+                    } else {
+                        chart.margin({ "left": 90, "right": 40, "top": 20, "bottom": 50 })
+                        chart.showLegend(false)
+                    }
                     chart.yAxis.axisLabel(resource.name + "(Rs. Crore)")
                         .axisLabelDistance(20);
 

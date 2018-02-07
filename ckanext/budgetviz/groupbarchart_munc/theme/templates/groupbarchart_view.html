@@ -1,22 +1,22 @@
 {% extends 'dataviewer/base.html' %}
 {% block page %}
-<div class="visualization-container visible-desktop"> 
-  <div class="row-fluid header-container">
+<div class="visualization-container container"> 
+  <div class="row header-container">
     <div class="span11">
       <div class="viz-header">{{ resource['name'] }}</div>
     </div>
   </div>
-  <div class="row-fluid chartarea">
+  <div class="row chartarea">
     <div id ="options-select" class="span3">
         <div id="select-list"></div>
     </div>
-    <div class="span9">
+    <div class="span8">
       <div id="chart" class='chart-container'>
         <svg></svg>
       </div>
     </div>
   </div>
-  <div class="row-fluid notes">
+  <div class="row notes">
     <div class="notes-container">
       <span class ="notes-heading">
       
@@ -26,16 +26,11 @@
     </div>
     <div class="unit-note">
       <span class ="unit-note-heading">
-      
       </span>
       <span class="unit-note-content">
       </span>
     </div>
   </div>
-</div>
-<div class="visible-tablet visible-phone na-text">
-The visualization are not available on mobile and tablet devices. <br>
-Please use Desktop/Laptop device to view the them. 
 </div>
 {% endblock %}
 
