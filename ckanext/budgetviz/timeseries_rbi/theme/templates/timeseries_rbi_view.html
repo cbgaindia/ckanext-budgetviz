@@ -1,17 +1,17 @@
 {% extends 'dataviewer/base.html' %}
 {% block page %}
-<div class="visualization-container visible-desktop"> 
-  <div class="row-fluid header-container">
+<div class="visualization-container container "> 
+  <div class="row header-container">
     <div class="span11">
       <div class="viz-header">{{ resource['name'] }}</div>
     </div>
   </div>
-  <div class="row-fluid">
+  <div class="row">
     <div id="chart" class='chart-container'>
       <svg></svg>
     </div>
   </div>
-   <div class="row-fluid notes">
+   <div class="row notes">
     <div class="notes-container">
       <span class ="notes-heading">
       
@@ -21,10 +21,7 @@
     </div>
   </div>
 </div>
-<div class="visible-tablet visible-phone na-text">
-The visualization are not available on mobile and tablet devices. <br>
-Please use Desktop/Laptop device to view the them. 
-</div>
+
 {% endblock %}
 
 {% block scripts %}

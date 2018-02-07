@@ -1,42 +1,39 @@
+{% extends 'dataviewer/base.html' %} 
 {% block page %}
-<div class="visualization-container visible-desktop"> 
-  <div class="header-container">
-    <div class="span7">
-      <div class="viz-header">{{ resource['name'] }}</div>
-    </div>
-    <div class="span5">
-      <div class="option-select">Figures in - </div>
-    </div>
-  </div>
-  <div class="row-fluid">
-    <div id="chart" class='chart-container'>
-      <svg></svg>
-    </div>
-  </div>
-  <div class="row-fluid notes">
-    <div class="notes-container">
-      <span class ="notes-heading">
-      </span>
-      <span class="notes-content">
-      </span>
-    </div>
-  </div>
-</div>
-<div class="visible-tablet visible-phone na-text">
-The visualization are not available on mobile and tablet devices. <br>
-Please use Desktop/Laptop device to view the them. 
-</div>
-{% endblock %}
 
+<div class="visualization-container container">
+    <div class="header-container">
+        <div class="span7">
+            <div class="viz-header">{{ resource['name'] }}</div>
+        </div>
+        <div class="span4">
+            <div class="option-select">Figures in - </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="chart" class='chart-container'>
+            <svg></svg>
+        </div>
+    </div>
+    <div class="row notes">
+        <div class="notes-container">
+            <span class="notes-heading">
+      </span>
+            <span class="notes-content">
+      </span>
+        </div>
+    </div>
+</div>
+{% endblock %} 
 {% block scripts %}
-  <script>
-    var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
-    var package_details = {{ h.literal(h.dump_json(package)) }}
-    var resource ={{ h.literal(h.dump_json(resource)) }};
-  </script>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
-  
-  {% resource 'base_css/budgetviz_base.css' %}
-  {% resource 'timeseriesipfs/main' %}
+<script>
+var resource_url = "{{ h.view_resource_url(resource_view, resource, package) }}";
+var package_details = {{ h.literal(h.dump_json(package))  }};
+var resource = {{ h.literal(h.dump_json(resource)) }};
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script>
+
+{% resource 'base_css/budgetviz_base.css' %} 
+{% resource 'timeseriesipfs/main' %} 
 {% endblock %}

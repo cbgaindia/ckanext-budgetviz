@@ -9,19 +9,20 @@ svg {
 }
 
 #item-select {
-	    border: 1px solid #ddd;
+    border: 1px solid #ddd;
     height: 460px;
     overflow: scroll;
     overflow-x: hidden;
 }
 
-.nav-stacked > li {
+.nav-stacked>li {
     font-size: 13px;
 }
 
 .nvd3 g.nv-groups path.nv-line {
-  stroke-width: 2px;
+    stroke-width: 2px;
 }
-    .nvd3 .nv-axis.nv-x path.domain {
-  stroke-opacity: 1!important;
+
+.nvd3 .nv-axis.nv-x path.domain {
+    stroke-opacity: 1!important;
 }

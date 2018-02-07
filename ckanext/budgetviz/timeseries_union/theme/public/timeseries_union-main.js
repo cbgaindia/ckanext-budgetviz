@@ -108,7 +108,7 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                             });
 
                         chart.focusHeight(120)
-                            .margin({ "left": 90, "right": 90, "top": 0, "bottom": 50 })
+                            .margin({ "left": 90, "right": 50, "top": 0, "bottom": 50 })
                             .noData("The record has no values in the budget document.")
                             .focusMargin({ "top": 20 })
                             .useInteractiveGuideline(false)
@@ -144,22 +144,27 @@ ckan.module('timeseries_ipfs-main', function($, _) {
                         })
 
                         chart.tooltip.valueFormatter(function(d) {
-                                return d3.format(",.f")(d) + " " + unit;
+
+                                if (data.name.includes("%")) {
+                                    return d3.format(",.f")(d) + "%"
+                                } else {
+                                    return d3.format(",.f")(d) + " " + unit;
+                                }
                             })
                             .headerFormatter(function(d) {
                                 var c = parseInt(d) + 1;
                                 return String(d) + " - " + String(c)
                             })
-                            /*
-                            if (maxValue < 0) {
-                                maxValue = 0;
-                            }
-                            if (minValue > 0) {
-                                minValue = 0;
-                            }
-                            chart.yDomain([minValue, maxValue]);
-                            */
-                            //chart.brushExtent([formatdate("2006"), formatdate("2016")]);
+                        /*
+                        if (maxValue < 0) {
+                            maxValue = 0;
+                        }
+                        if (minValue > 0) {
+                            minValue = 0;
+                        }
+                        chart.yDomain([minValue, maxValue]);
+                        */
+                        //chart.brushExtent([formatdate("2006"), formatdate("2016")]);
                         chartdata = d3.select('#chart svg')
                             .datum(data.series)
                             .call(chart);
